@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学习笔记 on PunchCode</title>
+    <link>https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 学习笔记 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mybatis入门</title>
+      <link>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</guid>
+      <description>MyBatis是一款优秀的持久层框架, 它支持自定义SQL/存储过程以及高级映射. MyBatis免除了几乎所有的JDBC代码以及设置参数和获取结果集的工作. MyBatis可以通过简单的XML或注解来配置和映射原始类型/接口和Java POJO为数据库中的记录. (官网介绍) 第一个Myb</description>
+    </item>
+    
+    <item>
+      <title>Vue继续入门</title>
+      <link>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</guid>
+      <description>参考 Vue getting started</description>
+    </item>
+    
+    <item>
+      <title>Vue入门</title>
+      <link>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</guid>
+      <description>官方文档的中文介绍有简单入门的视频教程, 下载HbuilderX, 并导入官方的教程代码. 我学习的过程是先看完视频跑一边代码再根据文档梳理一次. Hello World 把app这个vue对象的data对象绑定到&amp;lt;div&amp;gt;元素中. 要注意只有当实例被创建时就已经存在于data中的property</description>
+    </item>
+    
+    <item>
+      <title>Redis入门</title>
+      <link>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</guid>
+      <description>NoSQL方便扩展, 因为不像关系型数据库中的数据, 互相之间会有关联. 性能高, 而且数据类型多种多样, 不用提前设计. Redis代表Remote Dictionary Server. 可以用内存存储/持久化(rdb/aof), 效率高, 集成发布订阅系统, 有计时器和计数器. 有多重数据类型, 支持集群/事务. 传统的RDBMS: 有</description>
+    </item>
+    
+    <item>
+      <title>CSS tutorial</title>
+      <link>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</guid>
+      <description>CSS Overview CSS学习我打算纯靠看英文文档完成, 养成好习惯. CSS全称Cascading Style Sheets层叠级联样式表, 开始学习之前按照文档创建文件夹, 其中html文件用chrome打开, 编辑的时候用vscode, 用静态网站可以最快得测试效果. Selector: HTML element name Declaration: specifies which of the element&amp;rsquo;s properties you want to style Properties: ways in which you can style an</description>
+    </item>
+    
+    <item>
+      <title>HTML入门</title>
+      <link>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</guid>
+      <description>简介 &amp;lt;!-- DOCTYPE: 告诉浏览器规范(可省略) --&amp;gt; &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;!-- 头 --&amp;gt; &amp;lt;head&amp;gt; &amp;lt;!-- 描述标签 --&amp;gt; &amp;lt;!-- 做SEO --&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;keywords&amp;quot; content=&amp;quot;First html&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;description&amp;quot; charset=&amp;quot;learning html&amp;quot;&amp;gt; &amp;lt;!-- 标题 --&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;!-- 主体 --&amp;gt; &amp;lt;body&amp;gt; Hello world! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 基础标签 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;title&amp;gt;Basic Tag&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;!-- 标题标签 --&amp;gt; &amp;lt;h1&amp;gt;one&amp;lt;/h1&amp;gt; &amp;lt;h2&amp;gt;two&amp;lt;/h2&amp;gt; &amp;lt;h3&amp;gt;three&amp;lt;/h3&amp;gt; &amp;lt;h4&amp;gt;four&amp;lt;/h4&amp;gt; &amp;lt;h5&amp;gt;five&amp;lt;/h5&amp;gt; &amp;lt;h6&amp;gt;six&amp;lt;/h6&amp;gt; &amp;lt;!-- 段落标签 --&amp;gt; &amp;lt;p&amp;gt;Twinkle, twinkle, little star&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;How I wonder what you are&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;Up above the world so high&amp;lt;/p&amp;gt; &amp;lt;!-- 水平线标签 --&amp;gt; &amp;lt;hr/&amp;gt; &amp;lt;!-- 换行标签 --&amp;gt; Like a diamond in the sky&amp;lt;/br&amp;gt; Twinkle, twinkle little star&amp;lt;/br&amp;gt; How I</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-MVC/过滤器/监听器</title>
+      <link>https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/</guid>
+      <description>MVC三层架构 MVC: Controller专注于业务处理, 它的处理结果就是Model. Model可以是一个JavaBean(pojo), 也可以是一个包含多个对象的Map, Controller只负责把Model传递给View, View只负责把Model给渲染出来开发Controller时</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Cookie/Session</title>
+      <link>https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/</guid>
+      <description>cookie: 客户端技术(响应/请求), session: 服务器技术, 把信息或数据放在session中. 都是保存会话的技术. 现实中的例子就是已经登陆的网站, 下次可以直接登陆. Cookie 先测试cookie, 打印上次登录的时间. 要注意cookie是有大小和数量限制的. public class CookieDemo01 extends HttpServlet { @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { req.setCharacterEncoding(&amp;quot;utf-8&amp;quot;); resp.setCharacterEncoding(&amp;quot;utf-8&amp;quot;); PrintWriter out = resp.getWriter(); //服</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Servlet</title>
+      <link>https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/</link>
+      <pubDate>Fri, 14 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/</guid>
+      <description>原理 其中首次访问指创建war包的过程, service方法定义在Servlet接口中. 实验 在MVN repository中找Java Servlet API/jsp api, 导入maven. 除了通过maven导入, 也可以在Project Structure-Module导入. 删掉src, 在父项目下创建一个webapp类型</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Tomcat/Maven及其配置</title>
+      <link>https://huanruiz.github.io/post/notes/27_JavaWeb-TomcatMaven%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/27_JavaWeb-TomcatMaven%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</guid>
+      <description>Web服务器 静态web的客户端直接从服务器下文件, 像我的这个博客一样, 没法动态更新. 而动态web中, 服务器可以提供动态的资源, 可以连接数据库. JSP/Servlet B/S: 浏览器和服务器, C/S: 客户端和服务器. 而JSP(html嵌入Java)是sun主推的B/S架构, 基于java. 解决PHP无法承载高访问量的</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收器</title>
+      <link>https://huanruiz.github.io/post/notes/20_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</link>
+      <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/20_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</guid>
+      <description>按线程数分 串行垃圾回收器和并行垃圾回收器. 串行回收指的是在同一时间段内只允许有一个CPU用于执行垃圾回收操作, 此时工作线程被暂停, 直至垃圾收集工作结束. 单CPU处理器或者较小的应用内存等硬件平台不太足的场合, 串行回收器的性能表现可以超过并行回收器和并发回收器. 所以串行回收默认被应</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收相关概念</title>
+      <link>https://huanruiz.github.io/post/notes/19_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/19_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</guid>
+      <description>System.gc() 在默认情况下, 通过System.gc()或者Runtime.getRuntime().gc()的调用, 会显式触发Full GC, 同时对老年代和新生代进行回收, 尝试释放被丢弃对象占用的内存. System.gc()有免责声明, 只是提醒垃圾收集器运行, 不保证发生GC. JVM实现者可以通过s</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收概述与算法</title>
+      <link>https://huanruiz.github.io/post/notes/18_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/18_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%AE%97%E6%B3%95/</guid>
+      <description>垃圾是指在运行程序中没有任何指针指向的对象, 这个对象就是需要被回收的垃圾. 如果不及时对内存中的垃圾进行清理, 这些垃圾对象所占的内存空间会一直保留到应用程序结束, 被保留的空间无法被其他对象使用, 导致内存溢出. 对于高级语言来说, 一个基本认知是如果不进行垃圾回收, 内存迟早都会被消耗完.</description>
+    </item>
+    
+    <item>
+      <title>JVM上-字符串常量池</title>
+      <link>https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/</guid>
+      <description>String比较特殊, 具有不可变性(声明为final), 并且实现了Serializable接口(支持序列化), Comparable接口(可比较), 在介绍GC之前单独拿出来研究. 在jdk8中, String其实就是一个char的数组; jdk9中, String变成了byte数组, 因为像</description>
+    </item>
+    
+    <item>
+      <title>JVM上-执行引擎</title>
+      <link>https://huanruiz.github.io/post/notes/16_JVM%E4%B8%8A-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/16_JVM%E4%B8%8A-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</guid>
+      <description>虚拟机是一个相对于&amp;quot;物理机&amp;quot;的概念, 这两种机器都有代码执行能力; 区别是物理机的执行引擎是直接建立在处理器, 缓存, 指令集和操作系统层面上的. 而虚拟机的执行引擎则是由软件自行实现的, 因此可以不受物理条件制约地定制指令集与执行引擎的结构体系, 能够执行那些不被硬件直接</description>
+    </item>
+    
+    <item>
+      <title>JVM上-对象实例化与直接内存</title>
+      <link>https://huanruiz.github.io/post/notes/15_JVM%E4%B8%8A-%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/15_JVM%E4%B8%8A-%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96/</guid>
+      <description>运行时方法区已经讲完了, 那么new的对象是在堆中的, 它的类信息在方法区, 而局部变量在虚拟机栈中. 接下来我们梳理的是内存层面对象到底是怎么实例化, 内存布局是怎样的. 对象创建 对象创建的方式如下: 创建对象步骤 从字节码角度看, 用如下代码测试. public class ObjectTest { public static void main(String[] args) { Object obj = new Object(); } } 0: new #2 //加</description>
+    </item>
+    
+    <item>
+      <title>JVM上-方法区</title>
+      <link>https://huanruiz.github.io/post/notes/14_JVM%E4%B8%8A-%E6%96%B9%E6%B3%95%E5%8C%BA/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/14_JVM%E4%B8%8A-%E6%96%B9%E6%B3%95%E5%8C%BA/</guid>
+      <description>所有的方法区在逻辑上属于堆的一部分(官方文档原话), 但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩. 所以我们把方法区看作是一块独立于Java堆的内存空间. 本质上方法区和永久代(元空间)不等价, 但是在HotSpot我们认为他们相同. 要注意元空间不再虚拟机设置的内存中, 而是使</description>
+    </item>
+    
+    <item>
+      <title>JVM上-堆</title>
+      <link>https://huanruiz.github.io/post/notes/13_JVM%E4%B8%8A-%E5%A0%86/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/13_JVM%E4%B8%8A-%E5%A0%86/</guid>
+      <description>上一篇笔记讲的是运行时方法区的线程独享的部分, 接下来将线程共享的方法区与堆. Heap(堆) Java堆区在JVM启动的时候即被创建, 其空间大小也就确定了, 它是JVM管理的最大一块内存空间(堆内存的大小是可调). 堆在物理上不连续的内存空间中, 但在逻辑上它应该被视为连续. 堆空间逻辑上细</description>
+    </item>
+    
+    <item>
+      <title>JVM上-运行时数据区概述及线程</title>
+      <link>https://huanruiz.github.io/post/notes/12_JVM%E4%B8%8A-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/12_JVM%E4%B8%8A-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>回顾上一讲, class文件被类加载器加载之后, 会使用run engine去执行. Running Data Area具体内容如下图, 红色部分是多个线程共享的, 灰色部分是线程私有的. 一个JVM只有一个Area(只有一个Runtime实例). 线程 在HotSpot JVM, 每个线程都与操作系统的本地线程直接映射. 当一个</description>
+    </item>
+    
+    <item>
+      <title>JVM上-JVM与Java体系结构</title>
+      <link>https://huanruiz.github.io/post/notes/10_JVM%E4%B8%8A-JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/10_JVM%E4%B8%8A-JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</guid>
+      <description>Java的垃圾回收使得开发效率大大提升(对比C++), 但是理解JVM工作机制才能更好地让我们我们有扩展知识和debug的能力. JVM不一定只是支持Java的, 不同的编程语言通过编译器转化成遵从JMV规范的字节码文件, 都可以被解释运行. JVM是程序虚拟机, 而VMware属于系统虚拟</description>
+    </item>
+    
+    <item>
+      <title>JVM上-类加载子系统</title>
+      <link>https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</guid>
+      <description>通过Class Loader SubSystem从文件系统或者网络中加载Class文件. ClassLoader只负责XXX.class文件的加载, 至于它是否可以运行, 则由Execution Engine决定. 加载的类信息存放在方法区XXX.Class. 通过调用XXX.Class的构造器就可以进行</description>
+    </item>
+    
+    <item>
+      <title>Spring-AOP</title>
+      <link>https://huanruiz.github.io/post/notes/24_Spring_AOP/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/24_Spring_AOP/</guid>
+      <description>概念 面向切面编程, 利用AOP可以对业务逻辑的各个部分进行隔离, 使业务逻辑各部分之间的耦合度降低. 在不修改源代码的情况下, 也可以在主干功能里面添加新功能. 动态代理 有接口的情况, 使用JDK动态代理. 创建接口实现类代理对象, 去增强类的方法. 没有接口的情况, 使用CGLIB动态代理; 创建子</description>
+    </item>
+    
+    <item>
+      <title>Spring-IOC</title>
+      <link>https://huanruiz.github.io/post/notes/23_Spring_IOC/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/23_Spring_IOC/</guid>
+      <description>入门-创建对象 教育版的idea没有spring initializer, 建立普通Java工程就好. 创建好工程后将如下的jar文件(spring框架的依赖和日志依赖)添加进工程(project structure中). 新建User类. public class User { public void add() { System.out.println(&amp;quot;add......&amp;quot;); } } 在src目录下新建名为bean1.xml的文件, 内容</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-高级</title>
+      <link>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</guid>
+      <description>继续卖票 高内聚低耦合, 线程操作资源类. 操作指线程对外暴露的调用方法(高内聚). 线程之间低耦合. public class SaleTicket { public static void main(String[] args) { Ticket ticket = new Ticket(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;A&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;B&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;C&amp;quot;).start(); } } class Ticket { /</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-基础</title>
+      <link>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</guid>
+      <description>创建 方式1 创建继承Thread类的子类 重写Thread类的run() 创建Thread类的子类的对象 通过此对象调用start() public class ThreadBase { public static void main(String[] args) { MyThread t1 = new MyThread(); //t1.start(); //启动线程, 并调用当前线程的run() new Thread() { //直接创建Thread的匿名子类也可以 @Override public void run() { for (int i = 0; i &amp;lt; 100; i++) { System.out.println(&amp;quot;thread2&amp;quot; + &amp;quot;-&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>MySQL-高级</title>
+      <link>https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/</guid>
+      <description>回顾 性能下降原因 查询写的不好 索引失效(单值, 符合) 关联查询过多join 服务器调优和参数设置不合适 SQL解析顺序 几种join 注意这种公有部分没有的情况. SELECT ... FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NULL; inner join: 只有公有 left join/right join: 公有加主表独有 full outer join: 全部join, MySQL不支持, 但是可以通过union left joi</description>
+    </item>
+    
+    <item>
+      <title>MySQL-基础</title>
+      <link>https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/</guid>
+      <description>MySQL的常见命令 查看当前所有的数据库: show databases; 打开指定的库: use 库名 查看当前库的所有表: show tables; 查看其它库的所有表: show tables from 库名; 创建表: create table 表名( 列名 列类型, 列名 列类型 ); 查看表结构: desc 表名; 查看服务器的版本 登录到mysql服务端: select version(); 没有登录到mysql服务端: mysql --version MySQL的语法规范</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-链路层</title>
+      <link>https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/</guid>
+      <description>概述 运行链路层的主机/路由器/交换机等都叫结点(node), 连接相邻结点的通信信道叫链路. 数据报会被封装到链路层帧中并被传送到链路. 主体部分是网络适配器或者网络接口卡(NIC). 链路层提供的服务 framing. 链路接入, medium access control(MAC) protocol规定帧在链路上的传输规则. 可靠交付, 链路层提供可靠交</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-网络层</title>
+      <link>https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/</link>
+      <pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/</guid>
+      <description>网络层的分组是数据报, 一般由路由器把报文段封装成数据报, 或者从数据报提取报文段给运输层. 概述 转发与路由选择 转发: 分组到达路由器的输入链路时, 路由器把该分组移到合适的输出链路. 路由选择: 根据路由选择算法, 网络层决定分组从发送方到接收方的路径. 路由器根据**路由表(forwardin</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-运输层</title>
+      <link>https://huanruiz.github.io/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/</guid>
+      <description>运输层协议为运行在不同的主机上的应用进程之间提供了逻辑通信(logic communication), 它是在端系统中被实现的, 发送端的运输层把报文转换为报文段(segment)(为了避免混淆, 把数据报这个名字给网络层), 并将报文段传输给网络层, 网络层将其封装为网络层分组(数据报)并向目的的发送, 注意网络层是不</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-应用层</title>
+      <link>https://huanruiz.github.io/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/</guid>
+      <description>协议管理 网络应用体系结构 有应用体系结构决定如何在端系统组织该应用程序. 包括客户-服务器体系结构和P2P体系结构. 客户-服务器体系结构: 主机总是打开服务其他客户主机的请求, 比如Web应用程序. 客户之间不会通信. 服务器具有固定, 周知的IP地址. 较大的应用会有配备大量主机的有数据中心.</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-基础</title>
+      <link>https://huanruiz.github.io/post/notes/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%9F%BA%E7%A1%80/</guid>
+      <description>所有手机, 电脑, 平板都可以成为主机(host)或者端系统(end system), 他们通过通信链路和分组交换机连接在一起. 对于通信链路, 传输速率可以用bit/s或bps来衡量. 端系统互相通讯时会把数据分段, 为每段加上首部字节, 生成的包叫分组(packet). 分组交换机可以接受并转发分组, 包括路由</description>
+    </item>
+    
+    <item>
+      <title>操作系统-设备驱动与文件系统</title>
+      <link>https://huanruiz.github.io/post/notes/4_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/4_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
+      <description>I/O与显示器 使用外设通常就是CPU向外设发指令, 当外设完成后做中断处理程序. 有单片机背景的朋友应该会很熟悉这种模式, 通过i2总线, spi总线等等使挂载在总线上的设备或者传感器工作. 而对于计算机来说就是PCI总线. 向设备控制器的寄存器写很麻烦, 所以操作系统要给用户提供一个简单视图</description>
+    </item>
+    
+    <item>
+      <title>操作系统-内存管理</title>
+      <link>https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
+      <description>内存使用与分段 回顾冯诺依曼的取址执行, 计算机取址执行, 也就是将程序(从磁盘)放到内存中,PC指向开始地址. 如果有下面的代码, call 40所在的位置是0地址, _main所在的位置是40, 那么call 40就调用了_main所对应的指令. 然而这要求IP指针最初指向的call 40就在0, 显然不</description>
+    </item>
+    
+    <item>
+      <title>操作系统-进程与线程</title>
+      <link>https://huanruiz.github.io/post/notes/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <description>使用CPU 如果CPU只是简单地取址执行, 很多时间就会浪费在IO上, 因为IO通常是机械动作, 而CPU是电路工作, 所以这样就会降低CPU的使用率. 所以我们希望多道程序交替地执行, 来提升CPU地利用率. 下图的数字就是时间单位, 可以看出多道程序比单道程序的CPU利用率/设备的利用率都有了</description>
+    </item>
+    
+    <item>
+      <title>操作系统-基础</title>
+      <link>https://huanruiz.github.io/post/notes/1_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/1_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E7%A1%80/</guid>
+      <description>操作系统的课程来自哈工大的李志军老师, 视频和课件可以在B站找到, 配套的实验在蓝桥可以找到. 课程分为四个部分: 操作系统基础, 进程与线程, 内存管理, 设备驱动与文件系统. 视频部分有22小时. 操作系统发展 从图灵机到通用图灵机, 增加了控制器动作和状态, 控制器就可以通过不同的逻辑来操作数据.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>位运算 on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+    <description>Recent content in 位运算 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 17 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法-位运算</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/14_%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+      <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/14_%E4%BD%8D%E8%BF%90%E7%AE%97/</guid>
+      <description>面试题05.07. 配对交换 提取奇数位左移1位, 或上偶数位右移1位. class Solution { public int exchangeBits(int num) { return (((num &amp;amp; 0x55555555) &amp;lt;&amp;lt; 1) | ((num &amp;amp; 0xaaaaaaaa) &amp;gt;&amp;gt; 1)); } } 参考 labuladong算法 LeetCode刷题活动第二期Week2——位运算专题讲解 leetcode acwing</description>
+    </item>
+    
+  </channel>
+</rss>

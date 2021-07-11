@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on PunchCode</title>
+    <link>https://huanruiz.github.io/categories/Java/</link>
+    <description>Recent content in Java on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 11 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/categories/Java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java String</title>
+      <link>https://huanruiz.github.io/post/java/3_Java-String/</link>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/3_Java-String/</guid>
+      <description>在面试中遇到了一个问题: Java String是线程安全的吗? 我刚开始回答它是不安全的, 因为方法都没有加synchronized, 后来被面试官引导到字符串常量池才反应过来, String底层是private final char value[];, 是常量, 所以String一定是线程安全的, 并不能从synchronized来看</description>
+    </item>
+    
+    <item>
+      <title>Java Collection</title>
+      <link>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</guid>
+      <description>Collection Framework 首先根据图片感受一下整个collection的架构. Iterator Interface Collection接口扩展了Iterable接口, 目的还是为了操作其中的Iterator&amp;lt;T&amp;gt; iterator();这里主要关注Iterator而不是Iterable. 主要的抽象方法就是前两个, 如果c是某个</description>
+    </item>
+    
+    <item>
+      <title>Java如何自定义排序</title>
+      <link>https://huanruiz.github.io/post/java/1_Java%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/1_Java%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/</guid>
+      <description>Comparable接口 自定义的类自定义排序需要implementsComparable并且重写public int compareTo(Object o) String等包装类实现了Comparable接口, 重写了compareTo(obj)方法, 实现升序排列 compareTo(obj): 当前对象this大于形参对象obj, 返回正整数. 小于返回负整</description>
+    </item>
+    
+  </channel>
+</rss>

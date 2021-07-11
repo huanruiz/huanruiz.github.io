@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta name="generator" content="Hugo 0.76.5" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>PunchCode | Software Engineer</title>
+    <meta property="og:title" content="PunchCode | Software Engineer">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="Code Eat Sleep">
+    <meta property="og:url" content="https://huanruiz.github.io/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="https://huanruiz.github.io/index.xml" title="PunchCode" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="https://huanruiz.github.io">
+                            PunchCode
+                        </a>
+                    </h1>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/" title="数据结构-链表">数据结构-链表</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            翻转链表 迭代实现较为容易, 一般要用dummy做一个虚拟头指针, 因为头结点可能会变, 这里主要用来理解递归的方向来做. 我把base条件叫做终极情况, 这个终极情况是退出递归的最小子问题, 而次小子问题是极限情况, 也就是功能区的代码. 翻转链表一般都是后序遍历的思想, 函数的功能就是返回前一个……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/" title="数据结构-树">数据结构-树</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            二叉树 前中后序遍历是树的基础, 关于树的题目首先要想好到底是用哪种遍历的思想, 遍历通常有三种实现方式, 以前序遍历举例. 递归实现 最常用的方式. class Solution { List&lt;Integer&gt; res = new ArrayList&lt;Integer&gt;(); public List&lt;Integer&gt; preorderTraversal(TreeNode root) { if (root == null) return new ArrayList&lt;Integer&gt;(); // base // pre, 功能部分可以替换 res.add(root.val); // function preorderTraversal(root.left); preorderTraversal(root.right); // result return res; } } 栈实现 相当于DFS去搜索. class Solution { public List&lt;Integer&gt; preorderTraversal(TreeNode root) { List&lt;Integer&gt; res = new ArrayList&lt;&gt;(); if (root……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/datastructure_algorithm/2_%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="排序算法">排序算法</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            总结几大排序算法. 主要对比时间复杂度和空间复杂度. 下图是排序算法属性的总结. (表格中希尔排序的部分存疑) 算法 平均时间复杂度 最坏情况 空间复杂度 排序方式 稳定性 冒泡排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 稳定 选择排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 不稳定 插入排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 稳定 希尔排序 $O(nlogn)$ $O(nlog^{2}n)$ $O(1)$ 内部 不稳定 快速排序 $O(nlogn)$ $O(n^{2})$ $O(nlogn)$ 内部 不稳定 归并排序 $O(nlogn)$……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/datastructure_algorithm/2_%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/" title="剑指offer">剑指offer</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            这是剑指offer第二版的刷题小总结, 对应leetcode上剑指Offer专题的题目. 括号内的数字对应主站中题目的序号, 没有注明的复杂度都是指时间复杂度. 树 07.重建二叉树: 构建二叉树, 用前序遍历. preorder确定根节点的值, inorder确定左子树的大小, 就能根据index……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/" title="Java多线程-高级">Java多线程-高级</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年12月10日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            继续卖票 高内聚低耦合, 线程操作资源类. 操作指线程对外暴露的调用方法(高内聚). 线程之间低耦合. public class SaleTicket { public static void main(String[] args) { Ticket ticket = new Ticket(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &lt; 40; i++) { ticket.saleTicket(); } } }, &quot;A&quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &lt; 40; i++) { ticket.saleTicket(); } } }, &quot;B&quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &lt; 40; i++) { ticket.saleTicket(); } } }, &quot;C&quot;).start(); } } class Ticket { /……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/" title="Java多线程-基础">Java多线程-基础</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月30日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            创建 方式1 创建继承Thread类的子类 重写Thread类的run() 创建Thread类的子类的对象 通过此对象调用start() public class ThreadBase { public static void main(String[] args) { MyThread t1 = new MyThread(); //t1.start(); //启动线程, 并调用当前线程的run() new Thread() { //直接创建Thread的匿名子类也可以 @Override public void run() { for (int i = 0; i &lt; 100; i++) { System.out.println(&quot;thread2&quot; + &quot;-&quot;……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/" title="MySQL-高级">MySQL-高级</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            回顾 性能下降原因 查询写的不好 索引失效(单值, 符合) 关联查询过多join 服务器调优和参数设置不合适 SQL解析顺序 几种join 注意这种公有部分没有的情况. SELECT ... FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NULL; inner join: 只有公有 left join/right join: 公有加主表独有 full outer join: 全部join, MySQL不支持, 但是可以通过union left joi……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/" title="MySQL-基础">MySQL-基础</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月12日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            MySQL的常见命令 查看当前所有的数据库: show databases; 打开指定的库: use 库名 查看当前库的所有表: show tables; 查看其它库的所有表: show tables from 库名; 创建表: create table 表名( 列名 列类型, 列名 列类型 ); 查看表结构: desc 表名; 查看服务器的版本 登录到mysql服务端: select version(); 没有登录到mysql服务端: mysql --version MySQL的语法规范……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/" title="计算机网络-链路层">计算机网络-链路层</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            概述 运行链路层的主机/路由器/交换机等都叫结点(node), 连接相邻结点的通信信道叫链路. 数据报会被封装到链路层帧中并被传送到链路. 主体部分是网络适配器或者网络接口卡(NIC). 链路层提供的服务 framing. 链路接入, medium access control(MAC) protocol规定帧在链路上的传输规则. 可靠交付, 链路层提供可靠交……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/" title="计算机网络-网络层">计算机网络-网络层</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            网络层的分组是数据报, 一般由路由器把报文段封装成数据报, 或者从数据报提取报文段给运输层. 概述 转发与路由选择 转发: 分组到达路由器的输入链路时, 路由器把该分组移到合适的输出链路. 路由选择: 根据路由选择算法, 网络层决定分组从发送方到接收方的路径. 路由器根据**路由表(forwardin……
+        </div>
+        <p class="readmore"><a href="https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="https://huanruiz.github.io/page/4/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="https://huanruiz.github.io/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://huanruiz.github.io/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://huanruiz.github.io/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://huanruiz.github.io/page/4/">4</a>
+    </li>
+    
+    <li  class="current">
+        <a href="https://huanruiz.github.io/page/5/">5</a>
+    </li>
+    
+    <li >
+        <a href="https://huanruiz.github.io/page/6/">6</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://huanruiz.github.io/page/6/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

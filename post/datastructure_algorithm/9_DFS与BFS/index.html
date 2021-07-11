@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>DFS与BFS | PunchCode</title>
+    <meta property="og:title" content="DFS与BFS - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-08T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-08T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="DFS与BFS">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/datastructure_algorithm/9_DFS%E4%B8%8EBFS/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#回溯">回溯</a>
+      <ul>
+        <li><a href="#46-全排列">46. 全排列</a></li>
+        <li><a href="#47-全排列ii">47. 全排列II</a></li>
+        <li><a href="#51-n皇后52-n皇后ii">51. N皇后/52. N皇后II</a></li>
+        <li><a href="#37-解数独">37. 解数独</a></li>
+        <li><a href="#22-括号生成">22. 括号生成</a></li>
+        <li><a href="#17-电话号码的字母组合">17. 电话号码的字母组合</a></li>
+        <li><a href="#79-单词搜索">79. 单词搜索</a></li>
+        <li><a href="#78-子集">78. 子集</a></li>
+      </ul>
+    </li>
+    <li><a href="#bfs">BFS</a>
+      <ul>
+        <li><a href="#111-二叉树的最小深度">111. 二叉树的最小深度</a></li>
+        <li><a href="#752-打开转盘锁">752. 打开转盘锁</a></li>
+        <li><a href="#773-滑动谜题">773. 滑动谜题</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">DFS与BFS</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月8日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="回溯">回溯</h2>
+<p>DFS很多情况下会和回溯结合起来, 先通过全排列问题来构建回溯问题的框架. 我的理解中, 回溯实际上就是一种剪枝的技巧. 算法的本质依然是遍历.</p>
+<ol>
+<li>选择开始遍历的节点, 可能有多个</li>
+<li>构建回溯方法, 回溯的限制条件通常有<code>visited</code>, 数组的范围, 类似n皇后那种的其他限制条件</li>
+<li>回溯中递归的终止条件中通常包含答案. dfs遍历到的路径如果和目标路径长度相同, 就可以添加该路径. 注意要重新new新的对象, 防止浅拷贝带来的问题.</li>
+</ol>
+<h3 id="46-全排列">46. 全排列</h3>
+<pre><code>class Solution {
+    List&lt;List&lt;Integer&gt;&gt; res = new LinkedList&lt;&gt;(); //结果
+    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) {
+        LinkedList&lt;Integer&gt; track  = new LinkedList&lt;&gt;(); //dfs的路径
+        backtrack(track, nums);
+        return res;
+    }
+
+    private void backtrack(LinkedList&lt;Integer&gt; track, int[] nums) {
+        if (track.size() == nums.length) { //路径符合要求
+            res.add(new LinkedList(track)); //将路径加入答案
+            return;
+        }
+        for (int i = 0; i &lt; nums.length; i++) {
+            if (track.contains(nums[i])) continue; //路径不符合要求, 跳过
+            track.add(nums[i]); //添加当前走到的结点
+            backtrack(track, nums); //继续走
+            track.removeLast(); //删除当前走到的结点
+        }
+    }
+}
+</code></pre><h3 id="47-全排列ii">47. 全排列II</h3>
+<p>这道题有重复值, 在46题的基础上需要增加判断. 在46题中我们忽视了<code>visited</code>数组(因为没有重复的), 这道题和其他大多数题都是需要加上的. 数组排序后, 对于前面出现过的重复的值, 这个值是已经遍历过了, 所以要剪枝.</p>
+<pre><code>class Solution {
+    List&lt;List&lt;Integer&gt;&gt; res = new LinkedList&lt;&gt;();
+    public List&lt;List&lt;Integer&gt;&gt; permuteUnique(int[] nums) {
+        LinkedList&lt;Integer&gt; track = new LinkedList&lt;&gt;();
+        Arrays.sort(nums);
+        boolean[] visited = new boolean[nums.length];
+        backtrack(track, visited, nums);
+        return res;
+    }
+
+    private void backtrack(LinkedList&lt;Integer&gt; track, boolean[] visited, int[] nums) {
+        if (track.size() == nums.length) {
+            res.add(new LinkedList(track));
+            return;
+        }
+
+        for (int i = 0; i &lt; nums.length; i++) {
+            //前面遍历过的重复值就不需要再遍历了
+            if ((i &gt; 0 &amp;&amp; nums[i] == nums[i - 1] &amp;&amp; !visited[i - 1]) || visited[i]) continue;
+            visited[i] = true;
+            track.add(nums[i]);
+            backtrack(track, visited, nums);
+            visited[i] = false;
+            track.removeLast();
+        }
+    }
+}
+</code></pre><h3 id="51-n皇后52-n皇后ii">51. N皇后/52. N皇后II</h3>
+<p>这道题用数组做应该更快, 为了方便理解, 我用了StringBuilder. 不符合要求的判断条件增加了, 因为是从上往下填数字, 所以要检查左上, 右上和每一列是否有Q出现.</p>
+<pre><code>class Solution {
+    List&lt;List&lt;String&gt;&gt; res = new LinkedList&lt;&gt;();
+    public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) {
+        LinkedList&lt;String&gt; track = new LinkedList&lt;&gt;();
+        StringBuilder s = new StringBuilder(&quot;&quot;);
+        for (int i = 0; i &lt; n; i++) s.append(&quot;.&quot;);
+        for (int i = 0; i &lt; n; i++) track.add(s.toString());
+        bracktrack(track, 0);
+        return res;
+    }
+
+    private void bracktrack(LinkedList&lt;String&gt;track, int row) {
+        if (row == track.size()) {
+            res.add(new LinkedList(track));
+            return;
+        }
+        for (int col = 0; col &lt; track.size(); col++) {
+            if (!isValid(track, row, col)) continue;
+
+            StringBuilder s = new StringBuilder(track.get(row));
+            String origin = track.get(row);
+            s.replace(col, col + 1, &quot;Q&quot;);
+            track.set(row, s.toString());
+
+            bracktrack(track, row + 1);
+            track.set(row, origin); //恢复
+        }
+    }
+
+    private boolean isValid(LinkedList&lt;String&gt; track, int row, int col) {
+        for (int i = 0; i &lt; track.size(); i++) {
+            if (track.get(i).charAt(col) == 'Q') return false; //列上不重合
+        }
+        for (int i = row - 1, j = col - 1; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) {
+            if (track.get(i).charAt(j) == 'Q') return false; //左上不重合
+        }
+        for (int i = row - 1, j = col + 1; i &gt;= 0 &amp;&amp; j &lt; track.size(); i--, j++) {
+            if (track.get(i).charAt(j) == 'Q') return false; //右上不重合
+        }
+        return true;
+    }
+}
+</code></pre><h3 id="37-解数独">37. 解数独</h3>
+<p><strong>这道题只需要一个解, 那么可以用<code>boolean</code>作为返回值来节省时间</strong>. 只要符合要求, 直接返回这个正确答案, 不需要后续的修改.</p>
+<pre><code>class Solution {
+    public void solveSudoku(char[][] board) {
+        backtrack(board, 0, 0);
+    }
+
+    private boolean backtrack(char[][] board, int row, int col) {
+        if (col == 9) {
+            return backtrack(board, row + 1, 0); //这一行遍历完了, 进入下一行继续遍历
+        }
+        if (row == 9) return true; //全部遍历完成
+        for (int i = row; i &lt; 9; i++) {
+            for (int j = col; j &lt; 9; j++) {
+                if (board[i][j] != '.') {
+                    return backtrack(board, i, j + 1);
+                }
+                for (char c = '1'; c &lt;= '9'; c++) {
+                    if (!isValid(board, i, j, c)) continue;
+                    board[i][j] = c;
+                    if (backtrack(board, i, j + 1)) return true;
+                    board[i][j] = '.';
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValid(char[][] board, int row, int col, char c) {
+        //row colume
+        for (int i = 0; i &lt; 9; i++) {
+            if (board[row][i] == c) return false;
+            if (board[i][col] == c) return false;
+        }
+        int r = row / 3;
+        int co = col / 3;
+        for (int i = r * 3; i &lt; r * 3 + 3; i++) {
+            for (int j = co * 3; j &lt; co * 3 + 3; j++) {
+                if (board[i][j] == c) return false;
+            }
+        }
+        return true;
+    }
+}
+</code></pre><h3 id="22-括号生成">22. 括号生成</h3>
+<p>不合法等价于每个从0开始的子串的左括号数量大于右括号的数量.</p>
+<pre><code>class Solution {
+    LinkedList&lt;String&gt; res = new LinkedList&lt;&gt;();
+    public List&lt;String&gt; generateParenthesis(int n) {
+        StringBuilder s = new StringBuilder(&quot;&quot;);
+        backtrack(n, n, n, s);
+        return res;
+    }
+
+    private void backtrack(int n, int left, int right, StringBuilder s) {
+        if (left == 0 &amp;&amp; right == 0) {
+            res.add(s.toString());
+            return;
+        } else if (left &lt; 0 || right &lt; 0 || left &gt; right) return;
+        s.append(&quot;(&quot;);
+        backtrack(n, left - 1, right, s);
+        s.deleteCharAt(s.length() - 1);
+
+        s.append(&quot;)&quot;);
+        backtrack(n, left, right - 1, s);
+        s.deleteCharAt(s.length() - 1);
+    }
+}
+</code></pre><h3 id="17-电话号码的字母组合">17. 电话号码的字母组合</h3>
+<pre><code>class Solution {
+    List&lt;String&gt; res = new LinkedList&lt;&gt;();
+    HashMap&lt;Character, String&gt; map = new HashMap&lt;&gt;();
+    public List&lt;String&gt; letterCombinations(String digits) {
+        if (digits.equals(&quot;&quot;)) return res;
+        map.put('2', &quot;abc&quot;);
+        map.put('3', &quot;def&quot;);
+        map.put('4', &quot;ghi&quot;);
+        map.put('5', &quot;jkl&quot;);
+        map.put('6', &quot;mno&quot;);
+        map.put('7', &quot;pqrs&quot;);
+        map.put('8', &quot;tuv&quot;);
+        map.put('9', &quot;wxyz&quot;);
+        StringBuilder track = new StringBuilder();
+        backtrack(digits, track, 0);
+        return res;
+    }
+
+    private void backtrack(String digits, StringBuilder track, int index) {
+        if (index == digits.length()) {
+            res.add(track.toString());
+            return;
+        }
+        String currentString = map.get(digits.charAt(index));
+        for (int i = 0; i &lt; currentString.length(); i++) {
+            track.append(currentString.charAt(i));
+            backtrack(digits, track, index + 1);
+            track.deleteCharAt(track.length() - 1);
+        }
+    }
+}
+</code></pre><h3 id="79-单词搜索">79. 单词搜索</h3>
+<p>一定要在回溯方法的外面循环找结点, 否则逻辑不正确.</p>
+<pre><code>class Solution {
+    public boolean exist(char[][] board, String word) {
+        boolean[][] visited = new boolean[board.length][board[0].length];
+        for (int i = 0; i &lt; board.length; i++) {
+            for (int j = 0; j &lt; board[0].length; j++) {
+                if (backtrack(board, word, visited, i, j, 0)) return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean backtrack(char[][] board, String word, boolean[][] visited, int row, int col, int index) {
+        if (word.charAt(index) != board[row][col]) return false;
+        if (index == word.length() - 1) return true; //当前字母相等而且是最后一个字母
+        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+        visited[row][col] = true;
+        for (int[] d: directions) {
+            int r = row + d[0];
+            int c = col + d[1];
+            
+            if (r &gt;= 0 &amp;&amp; c &gt;= 0 &amp;&amp; r &lt; board.length &amp;&amp; c &lt; board[0].length &amp;&amp; !visited[r][c]) {
+                if (backtrack(board, word, visited, r, c, index + 1)) return true;
+            }
+        }
+        visited[row][col] = false;
+
+        return false;
+    }
+}
+</code></pre><h3 id="78-子集">78. 子集</h3>
+<p>从前往后遍历, 因为是子集, 所以对比全排列, <code>backtrack</code>中的<code>i</code>每次递归都会更新, 不会对同一个位置计算两次.</p>
+<pre><code>class Solution {
+    List&lt;List&lt;Integer&gt;&gt; res = new LinkedList&lt;&gt;();
+
+    public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) {
+        LinkedList&lt;Integer&gt; track = new LinkedList&lt;&gt;();
+        backtrack(nums, track, 0);
+        return res;
+    }
+
+    private void backtrack(int[] nums, LinkedList&lt;Integer&gt; track, int index) {
+        res.add(new LinkedList(track));
+        for (int i = index; i &lt; nums.length; i++) {
+            track.add(nums[i]);
+            backtrack(nums, track, i + 1);
+            track.removeLast();
+        }
+    }
+}
+</code></pre><h2 id="bfs">BFS</h2>
+<p>BFS可以找到<strong>最优路径</strong>, 而DFS只能找到路径. 但是BFS空间复杂度远大于DFS.</p>
+<ol>
+<li>构建队列<code> Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();</code>, 并添加第一个结点</li>
+<li>while循环, <code>while (!queue.isEmpty())</code></li>
+<li>将当前队列的大小<code>size</code>记录下来, 这个大小就是本轮便利的次数. 在<code>visited</code>这个set中的值跳过.</li>
+<li>添加下一层节点</li>
+</ol>
+<h3 id="111-二叉树的最小深度">111. 二叉树的最小深度</h3>
+<pre><code>//DFS前序遍历, 每次向下则深度加1
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null &amp;&amp; root.right == null) return 1;
+        else if (root.left == null &amp;&amp; root.right != null) return minDepth(root.right) + 1;
+        else if (root.left != null &amp;&amp; root.right == null) return minDepth(root.left) + 1;
+        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+    }
+}
+</code></pre><p>BFS的框架基本都是固定的, 如下.</p>
+<pre><code>//BFS
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+        queue.offer(root); //第一个结点
+        int depth = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size(); //当前包含元素数量
+            for (int i = 0; i &lt; size; i++) {
+                TreeNode cur = queue.poll(); //当前节点
+                if (cur.left == null &amp;&amp; cur.right == null) return depth;
+                if (cur.left != null) queue.offer(cur.left); //添加下一层节点
+                if (cur.right != null) queue.offer(cur.right); //添加下一层节点
+            }
+            depth++;
+        }
+        return depth;
+    }
+}
+</code></pre><h3 id="752-打开转盘锁">752. 打开转盘锁</h3>
+<p>BFS要防止往回走造成死循环, 所以要<code>visited</code>的HashSet. 这道题增加了不能到达的节点, 所以还需要额外的HashSet来存储这些不能去的节点. 如果只用<code>visited</code>一个哈希集合, 那么开头要检查<code>&quot;0000&quot;</code>是否在deadends内.</p>
+<pre><code>class Solution {
+    public int openLock(String[] deadends, String target) {
+        Set&lt;String&gt; visited = new HashSet();
+        Set&lt;String&gt; deadends_set = new HashSet();
+        Queue&lt;String&gt; q = new LinkedList&lt;&gt;();
+        int res = 0;
+        for (String s : deadends)
+            deadends_set.add(s);
+        q.add(&quot;0000&quot;); //第一个结点
+        visited.add(&quot;0000&quot;);
+
+        while (!q.isEmpty()) {
+            int size = q.size(); //当前包含元素数量
+            for (int i = 0; i &lt; size; i++) {
+                String cur = q.poll(); //当前节点
+                if (cur.equals(target)) return res;
+                if (deadends_set.contains(cur)) continue;
+                for (int j = 0; j &lt; 4; j++) { //添加下一层8个节点
+                    String up = add(cur, j);
+                    String down = minus(cur ,j);
+                    
+                    if (!visited.contains(up)) {
+                        visited.add(up);
+                        q.offer(up);
+                    }
+                    if (!visited.contains(down)) {
+                        visited.add(down);
+                        q.offer(down);
+                    }
+                }
+            }
+            res++;
+        }
+        return -1;
+    }
+
+    private String add(String password, int index) {
+        char[] parray = password.toCharArray();
+        if (parray[index] == '9') parray[index] = '0';
+        else parray[index]++;
+        return new String(parray);
+    }
+
+    private String minus(String password, int index) {
+        char[] parray = password.toCharArray();
+        if (parray[index] == '0') parray[index] = '9';
+        else parray[index]--;
+        return new String(parray);
+    }    
+}
+</code></pre><h3 id="773-滑动谜题">773. 滑动谜题</h3>
+<p>上一道题和这道题我们都可以把每一种状态想象成树的结点. 二维数组不好想象, 所以我们先把二维数组转换为<code>String</code>, 并且用一个数组来记录二维数组中每个元素的相邻元素在这个新的<code>String</code> board中的位置. 遍历的时候只要交换0和与其相邻的数字即可. 通过<code>visited</code><strong>确保不走走过的路(包括回头路)</strong>.</p>
+<pre><code>class Solution {
+    public int slidingPuzzle(int[][] board) {
+        StringBuilder sbboard = new StringBuilder();
+        for (int i = 0; i &lt; 2; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                sbboard.append(board[i][j]);
+            }
+        }
+        String newboard = sbboard.toString();
+
+        int[][] exchangeArray = new int[][]{
+            {1, 3},
+            {0, 2, 4},
+            {1, 5},
+            {0, 4},
+            {1, 3, 5},
+            {2, 4}
+        };
+
+        Queue&lt;String&gt; q = new LinkedList&lt;&gt;();
+        Set&lt;String&gt; visited = new HashSet&lt;&gt;();
+        q.offer(newboard);
+        visited.add(newboard);
+        int res = 0;
+        String target = &quot;123450&quot;;
+        
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i &lt; size; i++) {
+                String cur = q.poll();
+                if (cur.equals(target)) return res;
+
+                int index = 0;
+                while (cur.charAt(index) != '0') index++;
+                for (int j : exchangeArray[index]) {
+                    String tboard = swap(cur, j, index);
+                    if (!visited.contains(tboard)) {
+                        q.offer(tboard);
+                        visited.add(tboard);
+                    }
+                }
+            }
+            res++;
+        }
+        return -1;
+    }
+
+    private String swap(String board, int i, int j) {
+        char[] array = board.toCharArray();
+        char temp = array[j];
+        array[j] = array[i];
+        array[i] = temp;
+        return new String(array);
+    }
+}
+</code></pre><h2 id="参考">参考</h2>
+<ol>
+<li><a href="https://mp.weixin.qq.com/s/1221AWsL7G89RtaHyHjRPNJENA">labuladong算法-数组</a></li>
+<li><a href="https://www.bilibili.com/video/BV1yW411U72F">大雪菜LeetCode刷题活动第二期Week1——BFS与DFS专题讲解</a></li>
+<li><a href="https://leetcode-cn.com">leetcode</a></li>
+<li><a href="https://www.acwing.com/problem/">acwing</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/datastructure_algorithm/9_DFS%E4%B8%8EBFS/">https://huanruiz.github.io/post/datastructure_algorithm/9_DFS%E4%B8%8EBFS/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/datastructure_algorithm/8_%E6%95%B0%E7%BB%84%E7%B3%BB%E5%88%97/">数据结构与算法-数组系列</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/7_%E6%A0%88%E9%98%9F%E5%88%97%E5%A0%86/">栈队列堆</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/6_%E4%BA%8C%E5%88%86%E6%B3%95/">二分法</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/">数据结构-链表</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/3_%E6%A0%91/">数据结构-树</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95'>数据结构与算法</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

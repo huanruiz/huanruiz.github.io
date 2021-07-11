@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>JVM上-类加载子系统 | PunchCode</title>
+    <meta property="og:title" content="JVM上-类加载子系统 - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-25T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-25T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="JVM上-类加载子系统">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#loading">Loading</a></li>
+    <li><a href="#linking">Linking</a></li>
+    <li><a href="#initialization">Initialization</a></li>
+    <li><a href="#classloader">ClassLoader</a></li>
+    <li><a href="#双亲委派机制">双亲委派机制</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">JVM上-类加载子系统</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月25日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <p>通过Class Loader SubSystem从文件系统或者网络中加载Class文件. ClassLoader只负责<code>XXX.class</code>文件的加载, 至于它是否可以运行, 则由Execution Engine决定. 加载的类信息存放在方法区<code>XXX.Class</code>. 通过调用<code>XXX.Class</code>的构造器就可以进行实例化.
+
+        <img class="mx-auto" alt="" src="/notes/notes11_1.png" />   
+    
+
+        <img class="mx-auto" alt="" src="/notes/notes11_2.png" />   
+    </p>
+<h2 id="loading">Loading</h2>
+<p>通过一个类的全限定明获取定义此类的二进制字节流, 将这个字节流所代表的的<strong>静态存储结构转化为方法区的运行时数据</strong>, 在内存中生成一个代表这个类的<strong>java.lang.Class</strong>对象, 作为方法区这个类的各种数据的访问入口.</p>
+<h2 id="linking">Linking</h2>
+<p><strong>Verify阶段</strong>, 这个阶段去验证被加载的类是不是复合虚拟机要求的, 字节码开头是CA FE BA BY.</p>
+<p><strong>Prepare阶段</strong>为类的变量分配内存, 同时给这些变量进行初始化(0, false, null等等), 但是final修饰的static变量(常量)除外, 因为这些常量会在编译的时候就分配内存, 并在Prepare阶段显式初始化. 实例变量(方法中的对象)也不会被初始化, 而是随对象一起分配到堆中. 而方法变量会分配在方法区.</p>
+<p><strong>Resolution阶段</strong>将常量池内的符号引用转换为直接引用(以后讨论).</p>
+<blockquote>
+<p>可以通过<code>javap -v XXX.class</code>反编译</p>
+</blockquote>
+<h2 id="initialization">Initialization</h2>
+<ul>
+<li>初始化阶段就是执行类构造器方法<code>clinit()</code>的过程, 此方法不需要定义，是javac编译器自动收集类中的所有<strong>类变量的赋值动作</strong>和<strong>静态代码块中</strong>的语句合并而来. 这里注意类变量就是静态变量, 所以实际上可以理解为<code>clinit()</code>只和静态有关, 如果没有静态代码块, 没有类变量, 那么也就没有<code>clinit()</code>.</li>
+<li>并且构造器方法中指令按语句在源文件中出现的顺序执行. 如下图
+
+        <img class="mx-auto" alt="" src="/notes/notes11_3.png" />   
+    </li>
+<li>clinit()不同于类的构造器, 构造器函数就是上图的init, 因为我们创建了类, 那构造器就一定被调用了, 所以始终可以看到<code>init</code></li>
+<li>JVM保证子类clinit()执行前, 父类clinit()执行完毕; 一个类的clinit()在多线程下会被同步加锁.</li>
+</ul>
+<blockquote>
+<p><strong>static代码块</strong></p>
+<p>内部可以有输出语句; 随着类的加载而执行; 只执行一次; 初始化类信息; 多个静态代码块按声明顺序先后执行, 但是优先于非静态代码块; 只能调用静态结构, 因为还没对象的初始化</p>
+<p><strong>非static代码块</strong></p>
+<p>内部可以有输出语句; 随着对象的创建而执行; 每创建一个对象, 执行一次非静代码块; 可以在创建对象时, 对象属性会被初始化</p>
+</blockquote>
+<h2 id="classloader">ClassLoader</h2>
+<p>严格来说类加载器分为<strong>Bootstrap Classloader</strong>和<strong>User-Defined ClassLoader</strong>.
+
+        <img class="mx-auto" alt="" src="/notes/notes11_4.png" />   
+    </p>
+<p>概念上来说将所有派生于抽象类ClassLoader的类加载器都看做User-Defined ClassLoader.
+
+        <img class="mx-auto" alt="" src="/notes/notes11_5.png" />   
+    </p>
+<p>演示如下
+
+        <img class="mx-auto" alt="" src="/notes/notes11_6.png" />   
+    </p>
+<ol>
+<li><strong>Bootstrap Classloader</strong>: 用C/C++实现的, 嵌套在JVM内部; 它用来加载java的核心库; 不继承自java.lang.ClassLoader, 没有父加载器; 加载拓展类和应用程序类加载器，并指定为他们的父加载器; 只加载包名为java、javax、sun等开头的类.</li>
+<li><strong>Extension ClassLoader</strong>: 由sun.misc.Launcher$ExtClassLoader实现, 派生于ClassLoader类, 父类加载器为Bootstrap Classloader(但获取不到); 从java.ext.dirs系统属性所指定的目录中加载类库，或从JDK的安装目录的jre/lib/ext子目录(扩展目录)下加载类库。如果用户创建的JAR放在此目录下，也会由拓展类加载器自动加载.</li>
+<li><strong>AppClassLoader</strong>: 由sun.misc.Launcher$AppClassLoader实现, 派生于ClassLoader类, 父类加载器为拓展类加载器, 它负责加载环境变量classpath或系统属性java.class.path指定路径下的类库. 是程序中默认的类加载器.</li>
+</ol>
+<h2 id="双亲委派机制">双亲委派机制</h2>
+<p>Java虚拟机对class文件采用的是按需加载的方式. 也就是说一个类加载的时候会先不断向上委派, 父类加载器不能加载了, 才会让子类加载器加载. 双亲委派机制避免了类的重复加载, 并且防止核心api被随意修改.
+
+        <img class="mx-auto" alt="" src="/notes/notes11_7.png" />   
+    </p>
+<p>做一个实验. 这个实验中, 最后会由Bootstrap Classloader加载核心库的java.lang.String, 而核心库的<code>String</code>类是没有main方法的, 这也是<strong>安全机制</strong>的体现, 类加载器先加载了jdk自带的文件(rt.jar包中的java\lang\String.class).
+
+        <img class="mx-auto" alt="" src="/notes/notes11_8.png" />   
+    </p>
+<p>在jvm中表示两个class对象是否为同一个类存在的两个必要条件有两个: 1.类的(包含包名)完整类名必须一致; 2.<strong>加载这个类的ClassLoader(指ClassLoader实例对象)必须相同</strong>. 类的被动使用, 都不会导致类的初始化. 主动使用包括创建类的实例, 访问某各类或接口的静态变量，或者对静态变量赋值, 调用类的静态方法, 反射, 初始化一个类的子类等.</p>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/">https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/notes/10_JVM%E4%B8%8A-JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">JVM上-JVM与Java体系结构</a></li>
+        
+        <li><a href="/post/notes/24_Spring_AOP/">Spring-AOP</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/14_%E4%BD%8D%E8%BF%90%E7%AE%97/">数据结构与算法-位运算</a></li>
+        
+        <li><a href="/post/notes/23_Spring_IOC/">Spring-IOC</a></li>
+        
+        <li><a href="/post/datastructure_algorithm/13_%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">数据结构与算法-贪心算法</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/JVM'>JVM</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

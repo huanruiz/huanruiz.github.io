@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>设计模式 on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 02 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式-创造型模式</title>
+      <link>https://huanruiz.github.io/post/littletec/2_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E9%80%A0%E5%9E%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/littletec/2_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E9%80%A0%E5%9E%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>工厂方法 Factory Method 抽象工厂 Abstract Factory 建造者 Builder 原型 Prototype 单例 Singleton 保证一个类仅有一个实例, 并提供一个访问它的全局访问点. 也就是说, 用类自身去保存一个private static final的实例对象, 而类的构造方法作用域是private的, 保证类无法被外部实例化. 而类提供public static的getInstan</description>
+    </item>
+    
+  </channel>
+</rss>

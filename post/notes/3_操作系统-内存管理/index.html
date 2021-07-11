@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>操作系统-内存管理 | PunchCode</title>
+    <meta property="og:title" content="操作系统-内存管理 - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-10-11T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-10-11T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="操作系统-内存管理">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#内存使用与分段">内存使用与分段</a></li>
+    <li><a href="#内存分区与分页">内存分区与分页</a></li>
+    <li><a href="#多级页表与快表multilevel-paging">多级页表与快表(Multilevel Paging)</a></li>
+    <li><a href="#段页结合的实际内存管理">段页结合的实际内存管理</a>
+      <ul>
+        <li><a href="#步骤todo">步骤(todo)</a></li>
+      </ul>
+    </li>
+    <li><a href="#内存换入-请求调页">内存换入-请求调页</a></li>
+    <li><a href="#内存换出">内存换出</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">操作系统-内存管理</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年10月11日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="内存使用与分段">内存使用与分段</h2>
+<p>回顾冯诺依曼的取址执行, 计算机取址执行, 也就是<strong>将程序(从磁盘)放到内存中,PC指向开始地址</strong>. 如果有下面的代码, <code>call 40</code>所在的位置是0地址, <code>_main</code>所在的位置是40, 那么<code>call 40</code>就调用了<code>_main</code>所对应的指令. 然而这要求IP指针最初指向的<code>call 40</code>就在0, 显然不灵活, 所以程序中的地址<code>40</code>应该是相对(逻辑)地址. 在执行时, 会修改程序中的地址, 使其成为物理地址, 这就是<strong>重定位</strong>. 如果在<strong>编译时重定位</strong>的程序只能放在内存固定位置, 防止某段地址在编译后被使用了, <strong>载入时重定位的程序</strong>一旦载入内存就不能动了, 把相对地址加上空闲内存的基值, 这就更加灵活了.</p>
+<pre><code>...
+_main: mov [300], 0
+...
+call xx
+call 40
+</code></pre><p>为了充分利用内存, 进程会在内存和磁盘中<strong>交换(swap)</strong>, 也就是说即使程序已经载入了, 他们的物理地址还是会改变的, 所以重定位最合适的时机应该是<strong>运行时重定位(地址翻译)</strong>.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_1.png" />   
+    </p>
+<p>在PCB中存储<strong>基地址(base)</strong>, 物理地址就是base+offset(逻辑地址). 进程切换时根据PCB切换一起切换这个基地址, 每次取址执行都要计算真实的物理内存地址. 下图中的两个进程都有<code>mov ax, [100]</code>指令, 但实际上对应着2100和1100.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_2.png" />   
+    </p>
+<p>整个程序不是一起载入内存中的, 而是由若干部分(段)组成, 将各段分别放入内存. 每个段有各自的特点和用途. 比如有些库只读(写保护), 有些库可写, 对不同的库, 用户都可独立地考虑. 这里我也联想到了JVM, 栈空间如果只考虑自身, 那么实际上我们就可以扩展它本身而不考虑对其他如堆空间的影响(这只是我的猜测). 所以对同一个进程的不同段, 都有所对应的<strong>段的基值DS</strong>. 之前讲的GDT表所对应的就是os的段表, 而进程所对应的段表就是LDT表, 记录一些基值. 在程序分段进入内存之后, 就会找到段的基地址, 放在LDT表(存储在ldtr寄存机中)中并赋给PCB.</p>
+<h2 id="内存分区与分页">内存分区与分页</h2>
+<p>那么内存如何分割呢. 怎么找到内存中空闲的区域(分区)呢? 段的大小不能确定, 固定分区不够灵活, 所以需要<strong>可变分区</strong>, 如下图中的表, 包含了起始地址和分区长度. 如果有多个空闲分区, 该怎么选? 一般有<strong>首先适配</strong>(快), <strong>最佳适配</strong>(快), <strong>最差适配</strong>(可能就是首先适配的那一个区域). 如果段内存请求很不规则, 那么最佳适配就比较好.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_3.png" />   
+    </p>
+<p>实际的os中, 一般实际的物理内存是用的<strong>分页</strong>. 而分区针对的是虚拟内存, 在后面会见到. 分区下会有过多的内存碎片, 导致即使总空闲分区大, 但是每个空闲分区却不够, 这时候需要<strong>内存紧缩</strong>来使空闲分区合并, 但是这会花费大量时间. <strong>所以把内存分页, 针对每个段内存请求，系统一页一页地分配给这个段</strong>. 如果一页大小是4k, 那么一个段最多就浪费4k.</p>
+<p>与段表对应, 分页就需要用到页表, 存储在每个进程的cr3中. 页中的地址依然是逻辑地址, 对于4k的页面, 如果逻辑地址是0x2240, 右移12位($1024*4=^{12}$)就是0x02, 这就是页号, 对应一个页框号, 后三位这个余数0x240就是偏移地址. 最后的物理地址就是0x3240.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_4.png" />   
+    </p>
+<h2 id="多级页表与快表multilevel-paging">多级页表与快表(Multilevel Paging)</h2>
+<p>为了提高内存空间利用率, 页应该小, 但是页小了页表就大了. 所以, 因为很多逻辑地址不会用到, 自然就想到在<strong>用到逻辑页时才加入页表项</strong>. 但是如果页表项不连续, 去查找页号就会很慢(通过访问内存本来就慢, 额外访问就更慢, 连续则直接算偏移多少就可以了). 所以就有了<strong>多级页表</strong>, 也就是页目录表+页表, 就像书分章节一样去实现快速查找. <strong>空的页目录的映射/页表项就不用去记录</strong>, 节省空间. 但是多级页表也增加了访问的次数, 每多一级, 就要多访问一次内存.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_5.png" />   
+    </p>
+<p><strong>快表TLB</strong>可以记住最近使用的页表项. TLB是一组<strong>相联快速存储</strong>. 从硬件上就可以通过一次比对来找到物理地址. 题外话, 我感觉这种思想挺通用的, 就像DNS缓存一样, 用一点点额外的空间来换时间. TLB通常大小只有64到1024, 虽然小, 但是程序的地址访问存在局部性(循环/顺序结构), 逻辑页号通常就是那几个, 所以依然可以有比较好的命中率.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_6.png" />   
+    </p>
+<h2 id="段页结合的实际内存管理">段页结合的实际内存管理</h2>
+<p>实际上, 程序希望用段而物理内存希望用页, 所以这两者需要结合在一起. cs:ip指向的逻辑地址指向虚拟内存的某一段, 而用户代码段指向物理内存的物理地址(一些页), 这样就把的代码放在了真实的内存.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_7.png" />   
+    </p>
+<p>这种情况下如何重定位呢, 因为既分段, 又分页, 那么就需要两个表. 从用户角度来看, 依然是使用段号+偏移. 从操作系统的角度看, 就是物理页号+偏移.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_8.png" />   
+    </p>
+<h3 id="步骤todo">步骤(todo)</h3>
+<p><del>这一段还是有点迷惑, 真正理解需要做实验, 这里我写了一点大致的理解.</del></p>
+<p>在linux/kernel/fork.c中, 分配虚拟内存, 建段表. linux0.11分段都是64M的, 并且不重叠, 较为简单.</p>
+<pre><code>int copy_process(int nr, long ebp, ...) { ... // 复制进程
+    copy_mem(nr, p); ...
+}
+
+int copy_mem(int nr, task_struct *p) {
+    unsigned long new_data_base;
+    new_data_base=nr*0x4000000; // 64M * nr(进程id), 分割虚拟内存, 64M为一段
+    set_base(p-&gt;ldt[1],new_data_base); // PCB的ldt被赋值, 被分段, 进程切换段表也要切换
+    set_base(p-&gt;ldt[2],new_data_base); // 代码段/数据段
+}
+</code></pre><p>
+        <img class="mx-auto" alt="" src="/notes/notes3_9.png" />   
+    </p>
+<p>分配内存/物理页(父进程已经分配好, 这里复制即可), 建页表. 因为之前的虚拟地址是<strong>不重叠</strong>的, 所以可以用相同的一个页表.</p>
+<pre><code>int copy_mem(int nr, task_struct *p) {
+    unsigned long old_data_base;
+    old_data_base=get_base(current-&gt;ldt[2]);
+    copy_page_tables(old_data_base,new_data_base,data_limit); // 传递虚拟地址, 分配/复制内存
+}
+
+int copy_page_tables(unsigned long from,unsigned long to, long size) { 
+    from_dir = (unsigned long *)((from&gt;&gt;20)&amp;0xffc); // from是来自父进程的32位虚拟地址(10bits页目录号, 10bits页号, 12bit soffset). 
+    // 右移20位相当于右移22位乘以4, 因为右移22位得到的是目录号, 乘以4byte才能得到当前项
+    to_dir = (unsigned long *)((to&gt;&gt;20)&amp;0xffc);
+    size = (unsigned long)(size+0x3fffff)&gt;&gt;22;
+    for(; size--&gt;0; from_dir++, to_dir++) { // size: 有多个页目录(64M下的多个4M页目录), to_dir就是子进程页目录, 给子进程页目录分配实际内存
+        from_page_table=(0xfffff000&amp;*from_dir);
+        to_page_table=get_free_page(); 分配物理内存页(让页目录指向实际页), 这体现多级页表的优势, 如果没有映射就不分配物理内存页
+    }
+</code></pre><p>
+        <img class="mx-auto" alt="" src="/notes/notes3_10.png" />   
+    </p>
+<p>页目录新建好了, 就需要把的页实际内容拷贝过来. 让子进程和父进程对应的位置指向相同页.</p>
+<pre><code>for(;nr--&gt;0;from_page_table++,to_page_table++) {
+    this_page = *from_page_table; // 把from_page_table中的内容(页表项)取出
+    this_page&amp;=~2; //只读
+    *to_page_table=this_page;
+    *from_page_table=this_page;
+    this_page -= LOW_MEM; this_page &gt;&gt;= 12;
+    mem_map[this_page]++; 
+}
+</code></pre><p>1是父进程, 2是子进程. LDT表的基值从0x00400到0x00800. 因为只读, 保证了子进程不会写到7的位置, 而是新建页写到8的位置. MMU是内存管理单元. 通过重定位来真正使用内存.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_11.png" />   
+    </p>
+<h2 id="内存换入-请求调页">内存换入-请求调页</h2>
+<p>对用户来说, 能看到的值规整的虚拟内存, 虚拟内存比物理内存大是怎么实现的呢. 那就需要<strong>换入换出</strong>. 虚拟内存(磁盘)就像是仓库, 而物理内存就像是店面. 所以有换入换出, 才会有虚拟内存. 执行代码时, 如果发现页表对应项没有在内存中, 那么就需要把需要的页换入, 这里进行一个中断, 步骤如下图.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_12.png" />   
+    </p>
+<h2 id="内存换出">内存换出</h2>
+<p>物理内存是有限的, 所以并不能总是获得新的页, 那么就需要把页换出. 那么怎么选择淘汰的页呢.</p>
+<p>基础的是<strong>FIFO</strong>, 如下. 产生了7次缺页, D换A不合适, 理想的是换C.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_13.png" />   
+    </p>
+<p>就有了<strong>MIN</strong>, 选最远将使用的页淘汰, 这是最最优的, 但是预测未来是不可能的.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_14.png" />   
+    </p>
+<p>所以要通过之前的历史来预测将来, 就有了<strong>LRU页面置换</strong>: 选最近最长一段时间没有使用的页淘汰(最近最少使用). 实际上在这个例子和MIN的图一样, 只会产生5次缺页.</p>
+<p>从实现来看, 如果用<strong>时间戳</strong>, 也就是给每页都维护一个时间戳, 每次加1, 每执行一条指令都需要修改时间戳, 实现代价过大. 如果用<strong>用页码栈</strong>, 每次地址访问都需要修改栈, 实现代价依然太大. 这两种方法都是准确实现, 在实际系统中都不太实用, 所以在操作系统中要用近似实现.</p>
+<p>给每个页加一个<strong>引用位</strong>, 每次访问一页时, 硬件自动设置该位. 是1时清0, 并继续扫描, 本来就是0时淘汰该页. 也就是说从最近最少访问近似成了最近没有访问. 这就是<strong>Clock算法</strong>.
+
+        <img class="mx-auto" alt="" src="/notes/notes3_15.png" />   
+    </p>
+<p>但是如果缺页少, 就会让几乎所有R=1, 造成这个现象的原因是记录了太长的历史信息. 所以概要一个移动速度快的扫描指针用来定时清除R位. 而之前的指针移动速度慢, 用来选择淘汰页. 两个指针也更像clock了.</p>
+<p>当进程逐渐变多的过程中, CPU的利用率会上升, 但是当进程数量达到某个值的时候, CPU的利用率会急剧下降, 这个现象叫<strong>颠簸(thrashing)</strong>. 产生颠簸的原因是进程过多导致分到的页少, 进程就总是在等待调页完成, CPU一直不工作. 所以分配进程的页框数量也需要好好选择.</p>
+<h2 id="参考">参考</h2>
+<ol>
+<li>操作系统-李志军</li>
+<li><a href="https://www.lanqiao.cn/courses/115">配套实验</a></li>
+<li>汇编语言-王爽</li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/notes/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">操作系统-进程与线程</a></li>
+        
+        <li><a href="/post/notes/1_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E7%A1%80/">操作系统-基础</a></li>
+        
+        <li><a href="/post/littletec/1_%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BAHugo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E5%88%B0github-page/">如何搭建Hugo博客并部署到Github Page</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F'>操作系统</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

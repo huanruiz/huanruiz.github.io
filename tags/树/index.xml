@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>树 on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E6%A0%91/</link>
+    <description>Recent content in 树 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 15 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构-树</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/</link>
+      <pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/</guid>
+      <description>二叉树 前中后序遍历是树的基础, 关于树的题目首先要想好到底是用哪种遍历的思想, 遍历通常有三种实现方式, 以前序遍历举例. 递归实现 最常用的方式. class Solution { List&amp;lt;Integer&amp;gt; res = new ArrayList&amp;lt;Integer&amp;gt;(); public List&amp;lt;Integer&amp;gt; preorderTraversal(TreeNode root) { if (root == null) return new ArrayList&amp;lt;Integer&amp;gt;(); // base // pre, 功能部分可以替换 res.add(root.val); // function preorderTraversal(root.left); preorderTraversal(root.right); // result return res; } } 栈实现 相当于DFS去搜索. class Solution { public List&amp;lt;Integer&amp;gt; preorderTraversal(TreeNode root) { List&amp;lt;Integer&amp;gt; res = new ArrayList&amp;lt;&amp;gt;(); if (root</description>
+    </item>
+    
+  </channel>
+</rss>

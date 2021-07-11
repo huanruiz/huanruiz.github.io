@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>计算机网络-网络层 | PunchCode</title>
+    <meta property="og:title" content="计算机网络-网络层 - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-11-04T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-11-04T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="计算机网络-网络层">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#转发与路由选择">转发与路由选择</a></li>
+    <li><a href="#虚电路和数据报网络">虚电路和数据报网络</a>
+      <ul>
+        <li><a href="#虚电路网络">虚电路网络</a></li>
+        <li><a href="#数据报网络">数据报网络</a></li>
+      </ul>
+    </li>
+    <li><a href="#路由器工作原理">路由器工作原理</a>
+      <ul>
+        <li><a href="#输入端口">输入端口</a></li>
+        <li><a href="#交换结构">交换结构</a></li>
+        <li><a href="#输出端口">输出端口</a></li>
+        <li><a href="#路由选择器">路由选择器</a></li>
+        <li><a href="#何处出现排队">何处出现排队</a></li>
+      </ul>
+    </li>
+    <li><a href="#因特网转发与编址">因特网转发与编址</a>
+      <ul>
+        <li><a href="#数据报格式">数据报格式</a></li>
+        <li><a href="#ipv4">IPv4</a></li>
+        <li><a href="#因特网控制报文协议icmp">因特网控制报文协议(ICMP)</a></li>
+        <li><a href="#ipv6">IPv6</a></li>
+      </ul>
+    </li>
+    <li><a href="#路由选择算法">路由选择算法</a></li>
+    <li><a href="#广播和多播路由选择">广播和多播路由选择</a>
+      <ul>
+        <li><a href="#广播">广播</a></li>
+        <li><a href="#多播">多播</a></li>
+      </ul>
+    </li>
+    <li><a href="#实验">实验</a>
+      <ul>
+        <li><a href="#ip">IP</a></li>
+        <li><a href="#nat">NAT</a></li>
+        <li><a href="#icmp">ICMP</a></li>
+        <li><a href="#dhcp">DHCP</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">计算机网络-网络层</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <p>网络层的分组是数据报, 一般由路由器把报文段封装成数据报, 或者从数据报提取报文段给运输层.</p>
+<h2 id="概述">概述</h2>
+<h2 id="转发与路由选择">转发与路由选择</h2>
+<ul>
+<li>转发: 分组到达路由器的输入链路时, 路由器把该分组移到合适的输出链路.</li>
+<li>路由选择: 根据路由选择算法, 网络层决定分组从发送方到接收方的路径.</li>
+</ul>
+<p>路由器根据**路由表(forwarding table)**转发分组, 如下图所示, 分组的首部值会映射到某一个输出链路. 名词使用上我们通通讲网络层(第三层)的分组交换机统称为路由器.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_1.png" />   
+    </p>
+<h2 id="虚电路和数据报网络">虚电路和数据报网络</h2>
+<p>仅在网络层提供连接服务的计算机网络叫<strong>虚电路网络(Virtual-Circuit)</strong>, 仅在网络层提供无线连接服务的计算机网络叫<strong>数据报网络(datagram network)</strong>.</p>
+<h3 id="虚电路网络">虚电路网络</h3>
+<p>因特网是数据报网络, 但是许多其他网络结构(ATM, 帧中继体系结构)是虚电路网络. 虚电路组成如下:</p>
+<ol>
+<li>源和目的主机之间的路径</li>
+<li>沿该路径每段链路的VC号</li>
+<li>沿该路径每台路由器的转发表表项, VC号由路由器中的转发表决定.</li>
+</ol>
+<p>虚电路主要有三个阶段:</p>
+<ol>
+<li>虚链路建立. 网络层决定发送方接收方路径, 为每条链路决定VC号, 并在路径中的路由器转发表中添加表项.</li>
+<li>数据传送. 分组在虚电路流动.</li>
+<li>虚电路拆除. 发送方通知网络层终止虚电路, 网络层遍通知接收方结束呼叫, 并更新路径上路由器的转发表.</li>
+</ol>
+<p>虚电路的概念最早来自于电话线的连接. 对比运输层的连接, 可以发现虚电路的连接是涉及整个路径的, 路径上所有的路由器都参与虚电路的建立, 并且都知道经过它的所有虚电路.</p>
+<h3 id="数据报网络">数据报网络</h3>
+<p>端系统为分组加上目的端系统的地址, 并把分组推进网络中. 每个路由器根据分组的目的地址转发分组, 转发表保存了目的地址到<strong>链路接口</strong>的映射. 保存精确的所有IP地址(假设32位)是不可能的, 所以路由表是根据<strong>最长前缀匹配规则</strong>来匹配这个映射.</p>
+<h2 id="路由器工作原理">路由器工作原理</h2>
+<p>路由器体系结构如下:
+
+        <img class="mx-auto" alt="" src="/notes/notes8_2.png" />   
+    </p>
+<h3 id="输入端口">输入端口</h3>
+<p>将输入的物理链路和路由器连接, 完成查找功能, 控制分组从输入端口转发到路由选择器. <strong>这里的端口指路由器的物理端口, 而不是嵌套字的软件端口</strong>.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_3.png" />   
+    </p>
+<h3 id="交换结构">交换结构</h3>
+<p>将输入端口, 输出端口连接, 也就是路由器中的网络.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_4.png" />   
+    </p>
+<h3 id="输出端口">输出端口</h3>
+<p>从交换结构接收分组, 并通过输出链路转发(第六版中文书上翻译错成了输入链路)
+
+        <img class="mx-auto" alt="" src="/notes/notes8_5.png" />   
+    </p>
+<h3 id="路由选择器">路由选择器</h3>
+<p>执行路由选择协议, 维护路由选择表和连接的链路状态信息, 为路由器计算转发表.</p>
+<h3 id="何处出现排队">何处出现排队</h3>
+<p>输入输出端口都有队列, 所以都有可能发生排队. 如果队列过长, 耗尽了路由器的缓存空间, 就有可能丢包.</p>
+<h2 id="因特网转发与编址">因特网转发与编址</h2>
+<p>网络层三大组件:</p>
+<ol>
+<li>IP协议</li>
+<li>互联网控制报文协议ICMP</li>
+<li>路由选择
+
+        <img class="mx-auto" alt="" src="/notes/notes8_6.png" />   
+    </li>
+</ol>
+<h3 id="数据报格式">数据报格式</h3>
+<p>IPv4的数据报格式如下:
+
+        <img class="mx-auto" alt="" src="/notes/notes8_7.png" />   
+    </p>
+<ul>
+<li>版本号: 规定IP协议版本, IPv4是4, IPv6是6</li>
+<li>首部长度: 指明首部的长度, 确定数据部分从哪里开始</li>
+<li>服务类型: 区分不同类型的IP数据报</li>
+<li>数据报长度: IP数据报的总长度(首部字段+数据部分)</li>
+<li>表示/标志/片偏移: IP分片相关, 表示分片的开始与结束. IPv6中没有, 这也意味着IPv6没有分片.</li>
+<li>寿命(Time-To-Live, TTL): 确保数据报不会长时间在网络中循环, 跳一个路由器就会减1, TTL为0时数据包就被丢弃了,, 路由器就会发送ICMP通知源主机. 这个地方准确的说是每处理1秒都应该减1, 但实际上处理datagram的时间通常小于一秒,所以协议规定了就算没有1秒也应当减1, 也就可以近似每一跳减1了.</li>
+<li>协议: 指示数据报的数据部分应该给哪个运输层协议, 运输层实验也可以看到UDP对应17, TCP对应6. 将网络层和运输层绑定了起来.</li>
+<li>首部校验和: 校验数据报的比特错误. IP校验不包括数据位.</li>
+<li>源地址/目的地址: 顾名思义.</li>
+<li>选项: 允许IP首部扩展, IPv6中去掉了.</li>
+<li>数据: 会被交付给运输层的TCP/UDP. 也可能承载ICMP报文等等.</li>
+</ul>
+<blockquote>
+<p>IP数据报分片: 链路层承载的最大数据量叫做<strong>最大传送单元MTU</strong>, IP数据报需要比MTU小, 故分片. 而重新组装的工作交给端系统.</p>
+</blockquote>
+<h3 id="ipv4">IPv4</h3>
+<p>32bits, 4byte, 一共有$2^{32}$个可能的IP地址(约40亿). 在下图中, 左边三个主机构成一个LAN, 3个主机接口和一个路由器接口构成一个<strong>子网(subnet)</strong>, 这个子网最左侧24比特相同, 地址可以由233.1.1.0/24来表示, 这个24就是<strong>子网掩码(network mask)</strong>, 其对应的高比特位就是前缀. 因特网地址分配策略叫<strong>CIDR</strong>, 可以子网掩码是可变的, 并且不局限于8, 16, 24. CIDR之前, IP根据分类编制, IP地址的网络部分长度被限制在8, 16, 24比特(主机号就是32减网络号), 成为A, B, C类网络, 所对应的首位为0, 10, 110, <strong>全为0做网络号, 全为1做广播号, 用A类举例, 那么实际的ip范围就是1.0.0.1~126.255.255.254</strong>. 除此之外还有D类地址(多播地址), 首位是1110, 范围224.0.0.1~239.255.255.254; E类地址为保留地址, 首位为11110, 范围是240.0.0.1~254.255.255.254
+
+        <img class="mx-auto" alt="" src="/notes/notes8_8.png" />   
+    </p>
+<blockquote>
+<p>**接口(interface)**指的是路由器或者主机与物理链路的边界, 当我们抽象思考的时候, 应该把这个接口看作是ip.</p>
+</blockquote>
+<p>子网不仅指主机和路由器接口之间的网络, 也可以是路由器和路由器之间. 为了确定子网, 可以分开主机和路由器的接口, 产生隔离的网络岛, 使用接口隔离这些网络的端点. 如下图中R1和R2之间的223.1.9.0/24, R
+2和R3之间的223.1.8.0/24, R1和R2之间的223.1.7.0/24, 以及主机端口和路由器之间的子网. 可以看出一共有6个子网.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_9.png" />   
+    </p>
+<p>组织如何为设备分配地址块, 设备如何从组织中分配到一个地址?</p>
+<ol>
+<li>获取一块地址, 一般是从isp手中买一组地址.</li>
+<li>获取主机地址: 配置路由器各个接口的IP地址, 现在通常通过<strong>DHCP(动态主机配置协议)</strong>, 使主机动态地获得一个IP地址. 一般有一个4次握手的过程, 让DHCP服务器向主机推荐IP地址, 掩码, IP地址租用期等东西, 这里直接会用广播地址255.255.255.255, 使得主机可以在多个DHCP提供者中进行选择.</li>
+<li>网络地址转换(<strong>NAT(Network Address Translation)</strong>): 用下图过程解释, 实际上就是通过一个NAT转换表, 将WAN的ip和端口映射到LAN的ip和端口. 一方面解决了地址短缺的问题, 一方面隔离LAN和WAN. 这也是为什么有的人需要在路由器上实现内网穿透, 内网穿透本来也就叫NAT穿透. 这里我想提一点, 就是NAT既然改变了ip地址和端口, 那么TCP的时候校验字也就改变了, 所以NAT其实也应该去重新计算校验和.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_10.png" />   
+    </li>
+<li>UPnP: 解决了P2P的主机在NAT的LAN中的问题, 时LAN中的主机也能变成服务器, 其实就是把一个WAN口的ip和端口和这个做服务器的主机的ip和端口建立一个映射关系.</li>
+</ol>
+<h3 id="因特网控制报文协议icmp">因特网控制报文协议(ICMP)</h3>
+<p>通常被认为是IP的一部分, 但体系结构上是IP之上. 但是通常认为是网络层协议. 头部有8个byte, 用type和code就可以知道这一个ICMP的功能.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_11.png" />   
+    </p>
+<p>通常有如下的差错报告或询问.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_12.png" />   
+    </p>
+<h3 id="ipv6">IPv6</h3>
+<p>IPv6地址长度变成了128bit, 长这样<code>2001:0D12:0000:0000:02AA:0987:FE29:9871</code>, 每16位分一段, 分为8段, 暂时不研究这个.</p>
+<h2 id="路由选择算法">路由选择算法</h2>
+<p>与主机直接连接的路由器叫<strong>default router</strong>, 或者<strong>first-hop router</strong>. 路由选择的过程中, IP只知道下一跳的地址. <strong>网关</strong>指的是**自治系统(AS)**中, 向本AS之外的路由器转发分组的路由器.</p>
+<h2 id="广播和多播路由选择">广播和多播路由选择</h2>
+<h3 id="广播">广播</h3>
+<p>从一个源节点向其他节点发送分组. <strong>N次单播</strong>就是一种实现方法.</p>
+<h3 id="多播">多播</h3>
+<p>从一个源节点向其他网络节点的子集发送分组的副本, 提供批量传输的数据, 常用语交互式游戏, 流媒体, 数据供给等. 一般由<strong>间接地址(address indirection)<strong>编址,这种表示一种接收方的单一标识就是D类地址, 关联</strong>多播组</strong>. 通过**IGMP(因特网组管理协议)**来管理</p>
+<h2 id="实验">实验</h2>
+<h3 id="ip">IP</h3>
+<p>直接用的log. 分别用<code>traceroute</code>发送了56/2000/3500byte的数据报. 从192.168.1.102发送, 可以看到IP有中的protocal对应的是<code>0x01</code>, 代表了ICMP.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_13.png" />   
+    </p>
+<p>下图的ip分段了, 从<code>flag</code>中就可以看出, 而<code>offset = 0</code>代表了它是第一个分段的数据报, ip的总长度是1500byte, 1514这个多出来的14byte是以太网的头.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_14.png" />   
+    </p>
+<p>而ICMP的data实际上就是我们设置发送的数据报长度, 如果我理解正确的话, <code>3500</code>指的是了除ICMP头以外的所有东西, 因为最后的总长度是<code>3508</code>. 分段也可以查看到, 1480就是1500 - 20的ip头. 中括号内的内容不是首部字段的信息, 而是wireshark自己解析出来的信息.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_15.png" />   
+    </p>
+<h3 id="nat">NAT</h3>
+<p>分两个方向抓包, 以路由器为界, ISP方向抓一次, home端再抓一次. 对比三次握手后的第一个HTTP请求, 可以看到在LAN端的发送ip/端口是<code>192.168.1.100/4335</code>, 而在ISP端就变成了<code>71.192.34.104/4335</code>. 实际上就是通过NAT转换表将LAN到WAN进行了映射.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_16.png" />   
+    
+
+        <img class="mx-auto" alt="" src="/notes/notes8_17.png" />   
+    </p>
+<h3 id="icmp">ICMP</h3>
+<p>mac系统<code>ping -c 10 gaia.cs.umass.edu</code>, ping10次, 下面是用的原实验的log. 我们会发现ICMP没有端口号, 因为ICMP是网络层协议, 用IP承载, 不需要传输层的TCP或者UDP, 不需要指明端口.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_18.png" />   
+    </p>
+<p>下面是<code>traceroute</code>的抓包, 因为<code>traceroute</code>的TTL会逐渐增加, 所以前面可能发生TTL变为0的情况. 返回的ICMP中包含了普通的ICMP响应没有的IP头.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_19.png" />   
+    </p>
+<h3 id="dhcp">DHCP</h3>
+<p>为了测试, 先释放了当前ip, 我们的主机ip变成<code>0.0.0.0</code>, 然后再重新取得ip, renew2次. 然后再次release ip, renew ip.</p>
+<p>首先就可以的看到, DHCP跑的是UDP. (只是从运输层的信息判断是什么协议不直观, 从网络层ip头的<code>protocol</code>来看其实一目了然). 获取IP经历了Discover/Offer/Request/ACK四个阶段. host一直使用68端口, 而server使用67端口. (offer其实可能是单播, 见参考8). 从Transaction ID可以判断出是否是一组DHCP请求. 从ACK中可以查到<code>IP Address Lease Time</code>等信息. 而成功ACK后, host也有了自己的IP, 并确认使用这个IP, 即使offer是单播回复, 也需要ACK之后才能确认使用.
+
+        <img class="mx-auto" alt="" src="/notes/notes8_20.png" />   
+    </p>
+<h2 id="参考">参考</h2>
+<ol>
+<li>计算机网络-自顶向下方法(第6版)</li>
+<li>Computer Networking A Top-Down Approach(7th edition)</li>
+<li><a href="https://github.com/moranzcw/Computer-Networking-A-Top-Down-Approach-NOTES">作业</a></li>
+<li><a href="https://github.com/jzplp/Computer-Network-A-Top-Down-Approach-Answer">习题答案</a></li>
+<li><a href="https://gaia.cs.umass.edu/kurose_ross/wireshark.htm">wireshark实验</a></li>
+<li><a href="https://mp.weixin.qq.com/s/DfQT3Vw2xaq60YIil-7Yxw">对于Ping的过程, 你真的了解吗?</a></li>
+<li>程序羊-计算机网络面试题总结</li>
+<li><a href="https://www.zhihu.com/question/280872108/answer/438845996">DHCP offer报文到底是单播还是广播?车小胖的回答</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/">https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/">计算机网络-运输层</a></li>
+        
+        <li><a href="/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/">计算机网络-应用层</a></li>
+        
+        <li><a href="/post/notes/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%9F%BA%E7%A1%80/">计算机网络-基础</a></li>
+        
+        <li><a href="/post/notes/4_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">操作系统-设备驱动与文件系统</a></li>
+        
+        <li><a href="/post/java/1_Java%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/">Java如何自定义排序</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C'>计算机网络</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

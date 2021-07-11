@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/Vue/</link>
+    <description>Recent content in Vue on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/Vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue继续入门</title>
+      <link>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</guid>
+      <description>参考 Vue getting started</description>
+    </item>
+    
+    <item>
+      <title>Vue入门</title>
+      <link>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</guid>
+      <description>官方文档的中文介绍有简单入门的视频教程, 下载HbuilderX, 并导入官方的教程代码. 我学习的过程是先看完视频跑一边代码再根据文档梳理一次. Hello World 把app这个vue对象的data对象绑定到&amp;lt;div&amp;gt;元素中. 要注意只有当实例被创建时就已经存在于data中的property</description>
+    </item>
+    
+  </channel>
+</rss>

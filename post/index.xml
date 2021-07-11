@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on PunchCode</title>
+    <link>https://huanruiz.github.io/post/</link>
+    <description>Recent content in Posts on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mybatis入门</title>
+      <link>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</guid>
+      <description>MyBatis是一款优秀的持久层框架, 它支持自定义SQL/存储过程以及高级映射. MyBatis免除了几乎所有的JDBC代码以及设置参数和获取结果集的工作. MyBatis可以通过简单的XML或注解来配置和映射原始类型/接口和Java POJO为数据库中的记录. (官网介绍) 第一个Myb</description>
+    </item>
+    
+    <item>
+      <title>Vue继续入门</title>
+      <link>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/</guid>
+      <description>参考 Vue getting started</description>
+    </item>
+    
+    <item>
+      <title>Vue入门</title>
+      <link>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/</guid>
+      <description>官方文档的中文介绍有简单入门的视频教程, 下载HbuilderX, 并导入官方的教程代码. 我学习的过程是先看完视频跑一边代码再根据文档梳理一次. Hello World 把app这个vue对象的data对象绑定到&amp;lt;div&amp;gt;元素中. 要注意只有当实例被创建时就已经存在于data中的property</description>
+    </item>
+    
+    <item>
+      <title>Redis入门</title>
+      <link>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</guid>
+      <description>NoSQL方便扩展, 因为不像关系型数据库中的数据, 互相之间会有关联. 性能高, 而且数据类型多种多样, 不用提前设计. Redis代表Remote Dictionary Server. 可以用内存存储/持久化(rdb/aof), 效率高, 集成发布订阅系统, 有计时器和计数器. 有多重数据类型, 支持集群/事务. 传统的RDBMS: 有</description>
+    </item>
+    
+    <item>
+      <title>从高校到职场-上</title>
+      <link>https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/</link>
+      <pubDate>Thu, 03 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/</guid>
+      <description>一直有一个想法, 总结一下成年之后从本科到研究生的一路经历. 现在正好入职快一个月, 觉得时候挺好的, 故写此文. 现在的想法是用上中下三个部分分别写本科/硕士/工作一个月的一些想法. 我从12岁开始写日记到现在10多年, 日记慢慢地变成周记, 月记, 到现在改成不定期写博客, 时间拉得越长, 实际上</description>
+    </item>
+    
+    <item>
+      <title>CSS tutorial</title>
+      <link>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</guid>
+      <description>CSS Overview CSS学习我打算纯靠看英文文档完成, 养成好习惯. CSS全称Cascading Style Sheets层叠级联样式表, 开始学习之前按照文档创建文件夹, 其中html文件用chrome打开, 编辑的时候用vscode, 用静态网站可以最快得测试效果. Selector: HTML element name Declaration: specifies which of the element&amp;rsquo;s properties you want to style Properties: ways in which you can style an</description>
+    </item>
+    
+    <item>
+      <title>HTML入门</title>
+      <link>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</guid>
+      <description>简介 &amp;lt;!-- DOCTYPE: 告诉浏览器规范(可省略) --&amp;gt; &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;!-- 头 --&amp;gt; &amp;lt;head&amp;gt; &amp;lt;!-- 描述标签 --&amp;gt; &amp;lt;!-- 做SEO --&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;keywords&amp;quot; content=&amp;quot;First html&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;description&amp;quot; charset=&amp;quot;learning html&amp;quot;&amp;gt; &amp;lt;!-- 标题 --&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;!-- 主体 --&amp;gt; &amp;lt;body&amp;gt; Hello world! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 基础标签 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;title&amp;gt;Basic Tag&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;!-- 标题标签 --&amp;gt; &amp;lt;h1&amp;gt;one&amp;lt;/h1&amp;gt; &amp;lt;h2&amp;gt;two&amp;lt;/h2&amp;gt; &amp;lt;h3&amp;gt;three&amp;lt;/h3&amp;gt; &amp;lt;h4&amp;gt;four&amp;lt;/h4&amp;gt; &amp;lt;h5&amp;gt;five&amp;lt;/h5&amp;gt; &amp;lt;h6&amp;gt;six&amp;lt;/h6&amp;gt; &amp;lt;!-- 段落标签 --&amp;gt; &amp;lt;p&amp;gt;Twinkle, twinkle, little star&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;How I wonder what you are&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;Up above the world so high&amp;lt;/p&amp;gt; &amp;lt;!-- 水平线标签 --&amp;gt; &amp;lt;hr/&amp;gt; &amp;lt;!-- 换行标签 --&amp;gt; Like a diamond in the sky&amp;lt;/br&amp;gt; Twinkle, twinkle little star&amp;lt;/br&amp;gt; How I</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-MVC/过滤器/监听器</title>
+      <link>https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/</guid>
+      <description>MVC三层架构 MVC: Controller专注于业务处理, 它的处理结果就是Model. Model可以是一个JavaBean(pojo), 也可以是一个包含多个对象的Map, Controller只负责把Model传递给View, View只负责把Model给渲染出来开发Controller时</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Cookie/Session</title>
+      <link>https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/</guid>
+      <description>cookie: 客户端技术(响应/请求), session: 服务器技术, 把信息或数据放在session中. 都是保存会话的技术. 现实中的例子就是已经登陆的网站, 下次可以直接登陆. Cookie 先测试cookie, 打印上次登录的时间. 要注意cookie是有大小和数量限制的. public class CookieDemo01 extends HttpServlet { @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { req.setCharacterEncoding(&amp;quot;utf-8&amp;quot;); resp.setCharacterEncoding(&amp;quot;utf-8&amp;quot;); PrintWriter out = resp.getWriter(); //服</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Servlet</title>
+      <link>https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/</link>
+      <pubDate>Fri, 14 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/</guid>
+      <description>原理 其中首次访问指创建war包的过程, service方法定义在Servlet接口中. 实验 在MVN repository中找Java Servlet API/jsp api, 导入maven. 除了通过maven导入, 也可以在Project Structure-Module导入. 删掉src, 在父项目下创建一个webapp类型</description>
+    </item>
+    
+    <item>
+      <title>JavaWeb-Tomcat/Maven及其配置</title>
+      <link>https://huanruiz.github.io/post/notes/27_JavaWeb-TomcatMaven%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/27_JavaWeb-TomcatMaven%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</guid>
+      <description>Web服务器 静态web的客户端直接从服务器下文件, 像我的这个博客一样, 没法动态更新. 而动态web中, 服务器可以提供动态的资源, 可以连接数据库. JSP/Servlet B/S: 浏览器和服务器, C/S: 客户端和服务器. 而JSP(html嵌入Java)是sun主推的B/S架构, 基于java. 解决PHP无法承载高访问量的</description>
+    </item>
+    
+    <item>
+      <title>科目一重点总结</title>
+      <link>https://huanruiz.github.io/post/other/1_%E7%A7%91%E7%9B%AE%E4%B8%80%E9%87%8D%E7%82%B9%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/other/1_%E7%A7%91%E7%9B%AE%E4%B8%80%E9%87%8D%E7%82%B9%E6%80%BB%E7%BB%93/</guid>
+      <description>证 驾驶证处罚时间: 假一: 虚假驾照选1年, 吊二: 吊销驾照选2年, 撤三: 撤销驾照选3年, 醉五: 醉酒肇事选5年, 逃终生: 肇事逃逸选终生. 牌/检/保/行/驾带好, 否则扣留车辆. 机动车驾驶人因服兵役, 出国(境)等原因, 审验延长3年. 假1骗3 被注销机动车驾驶证未超过两年的, 机动车驾驶人考试科</description>
+    </item>
+    
+    <item>
+      <title>Java String</title>
+      <link>https://huanruiz.github.io/post/java/3_Java-String/</link>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/3_Java-String/</guid>
+      <description>在面试中遇到了一个问题: Java String是线程安全的吗? 我刚开始回答它是不安全的, 因为方法都没有加synchronized, 后来被面试官引导到字符串常量池才反应过来, String底层是private final char value[];, 是常量, 所以String一定是线程安全的, 并不能从synchronized来看</description>
+    </item>
+    
+    <item>
+      <title>设计模式-创造型模式</title>
+      <link>https://huanruiz.github.io/post/littletec/2_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E9%80%A0%E5%9E%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 02 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/littletec/2_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%88%9B%E9%80%A0%E5%9E%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>工厂方法 Factory Method 抽象工厂 Abstract Factory 建造者 Builder 原型 Prototype 单例 Singleton 保证一个类仅有一个实例, 并提供一个访问它的全局访问点. 也就是说, 用类自身去保存一个private static final的实例对象, 而类的构造方法作用域是private的, 保证类无法被外部实例化. 而类提供public static的getInstan</description>
+    </item>
+    
+    <item>
+      <title>LRU与LFU</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/16_LRU%E4%B8%8ELFU/</link>
+      <pubDate>Tue, 16 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/16_LRU%E4%B8%8ELFU/</guid>
+      <description>146. LRU缓存机制 双向链表(存储结构) + 哈希表(快速索引). key为node的一部分, 也是用来索引的标志. class LRUCache { HashMap&amp;lt;Integer, Node&amp;gt; map; DoubleList cache; int capacity; public LRUCache(int capacity) { this.capacity = capacity; map = new HashMap&amp;lt;&amp;gt;(); cache = new DoubleList(); } public int get(int key) { if (!map.containsKey(key)) { return -1; } makeRecently(key); return map.get(key).val; } public void put(int key, int value) { if (map.containsKey(key)) { deleteKey(key); addRecently(key, value); return; } if (capacity == cache.size()) { removeLeastRecently(); } addRecently(key, value); } private void makeRecently(int key) { Node x = map.get(key); cache.remove(x); cache.addLast(x); } private void addRecently(int key, int val) { Node x =</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-并查集</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/15_%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+      <pubDate>Mon, 15 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/15_%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
+      <description>框架 照搬的参考3. class UF { private int count; //记录连通分量个数 private int[] parent; //存储若干棵树 private int[] size; //记录树的大小 public UF(int n) { this.count = n; parent = new int[n]; size = new int[n]; for (int i = 0; i &amp;lt; n; i++) { parent[i] = i; size[i] = 1; } } //将p和q连通 public void union(int p, int q) { int rootP = find(p); int rootQ = find(q); if (rootP == rootQ) return; //小树接到大树下面 if (size[rootP] &amp;gt; size[rootQ]) { parent[rootQ] = rootP; size[rootP] += size[rootQ]; } else { parent[rootP] = rootQ; size[rootQ] += size[rootP]; } count--;</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收器</title>
+      <link>https://huanruiz.github.io/post/notes/20_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</link>
+      <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/20_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</guid>
+      <description>按线程数分 串行垃圾回收器和并行垃圾回收器. 串行回收指的是在同一时间段内只允许有一个CPU用于执行垃圾回收操作, 此时工作线程被暂停, 直至垃圾收集工作结束. 单CPU处理器或者较小的应用内存等硬件平台不太足的场合, 串行回收器的性能表现可以超过并行回收器和并发回收器. 所以串行回收默认被应</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收相关概念</title>
+      <link>https://huanruiz.github.io/post/notes/19_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/19_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</guid>
+      <description>System.gc() 在默认情况下, 通过System.gc()或者Runtime.getRuntime().gc()的调用, 会显式触发Full GC, 同时对老年代和新生代进行回收, 尝试释放被丢弃对象占用的内存. System.gc()有免责声明, 只是提醒垃圾收集器运行, 不保证发生GC. JVM实现者可以通过s</description>
+    </item>
+    
+    <item>
+      <title>JVM上-垃圾回收概述与算法</title>
+      <link>https://huanruiz.github.io/post/notes/18_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/18_JVM%E4%B8%8A-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%AE%97%E6%B3%95/</guid>
+      <description>垃圾是指在运行程序中没有任何指针指向的对象, 这个对象就是需要被回收的垃圾. 如果不及时对内存中的垃圾进行清理, 这些垃圾对象所占的内存空间会一直保留到应用程序结束, 被保留的空间无法被其他对象使用, 导致内存溢出. 对于高级语言来说, 一个基本认知是如果不进行垃圾回收, 内存迟早都会被消耗完.</description>
+    </item>
+    
+    <item>
+      <title>JVM上-字符串常量池</title>
+      <link>https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/</guid>
+      <description>String比较特殊, 具有不可变性(声明为final), 并且实现了Serializable接口(支持序列化), Comparable接口(可比较), 在介绍GC之前单独拿出来研究. 在jdk8中, String其实就是一个char的数组; jdk9中, String变成了byte数组, 因为像</description>
+    </item>
+    
+    <item>
+      <title>JVM上-执行引擎</title>
+      <link>https://huanruiz.github.io/post/notes/16_JVM%E4%B8%8A-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</link>
+      <pubDate>Fri, 29 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/16_JVM%E4%B8%8A-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/</guid>
+      <description>虚拟机是一个相对于&amp;quot;物理机&amp;quot;的概念, 这两种机器都有代码执行能力; 区别是物理机的执行引擎是直接建立在处理器, 缓存, 指令集和操作系统层面上的. 而虚拟机的执行引擎则是由软件自行实现的, 因此可以不受物理条件制约地定制指令集与执行引擎的结构体系, 能够执行那些不被硬件直接</description>
+    </item>
+    
+    <item>
+      <title>JVM上-对象实例化与直接内存</title>
+      <link>https://huanruiz.github.io/post/notes/15_JVM%E4%B8%8A-%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/15_JVM%E4%B8%8A-%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96/</guid>
+      <description>运行时方法区已经讲完了, 那么new的对象是在堆中的, 它的类信息在方法区, 而局部变量在虚拟机栈中. 接下来我们梳理的是内存层面对象到底是怎么实例化, 内存布局是怎样的. 对象创建 对象创建的方式如下: 创建对象步骤 从字节码角度看, 用如下代码测试. public class ObjectTest { public static void main(String[] args) { Object obj = new Object(); } } 0: new #2 //加</description>
+    </item>
+    
+    <item>
+      <title>JVM上-方法区</title>
+      <link>https://huanruiz.github.io/post/notes/14_JVM%E4%B8%8A-%E6%96%B9%E6%B3%95%E5%8C%BA/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/14_JVM%E4%B8%8A-%E6%96%B9%E6%B3%95%E5%8C%BA/</guid>
+      <description>所有的方法区在逻辑上属于堆的一部分(官方文档原话), 但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩. 所以我们把方法区看作是一块独立于Java堆的内存空间. 本质上方法区和永久代(元空间)不等价, 但是在HotSpot我们认为他们相同. 要注意元空间不再虚拟机设置的内存中, 而是使</description>
+    </item>
+    
+    <item>
+      <title>JVM上-堆</title>
+      <link>https://huanruiz.github.io/post/notes/13_JVM%E4%B8%8A-%E5%A0%86/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/13_JVM%E4%B8%8A-%E5%A0%86/</guid>
+      <description>上一篇笔记讲的是运行时方法区的线程独享的部分, 接下来将线程共享的方法区与堆. Heap(堆) Java堆区在JVM启动的时候即被创建, 其空间大小也就确定了, 它是JVM管理的最大一块内存空间(堆内存的大小是可调). 堆在物理上不连续的内存空间中, 但在逻辑上它应该被视为连续. 堆空间逻辑上细</description>
+    </item>
+    
+    <item>
+      <title>JVM上-运行时数据区概述及线程</title>
+      <link>https://huanruiz.github.io/post/notes/12_JVM%E4%B8%8A-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Wed, 27 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/12_JVM%E4%B8%8A-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>回顾上一讲, class文件被类加载器加载之后, 会使用run engine去执行. Running Data Area具体内容如下图, 红色部分是多个线程共享的, 灰色部分是线程私有的. 一个JVM只有一个Area(只有一个Runtime实例). 线程 在HotSpot JVM, 每个线程都与操作系统的本地线程直接映射. 当一个</description>
+    </item>
+    
+    <item>
+      <title>JVM上-JVM与Java体系结构</title>
+      <link>https://huanruiz.github.io/post/notes/10_JVM%E4%B8%8A-JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/10_JVM%E4%B8%8A-JVM%E4%B8%8EJava%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</guid>
+      <description>Java的垃圾回收使得开发效率大大提升(对比C++), 但是理解JVM工作机制才能更好地让我们我们有扩展知识和debug的能力. JVM不一定只是支持Java的, 不同的编程语言通过编译器转化成遵从JMV规范的字节码文件, 都可以被解释运行. JVM是程序虚拟机, 而VMware属于系统虚拟</description>
+    </item>
+    
+    <item>
+      <title>JVM上-类加载子系统</title>
+      <link>https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Mon, 25 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/11_JVM%E4%B8%8A-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/</guid>
+      <description>通过Class Loader SubSystem从文件系统或者网络中加载Class文件. ClassLoader只负责XXX.class文件的加载, 至于它是否可以运行, 则由Execution Engine决定. 加载的类信息存放在方法区XXX.Class. 通过调用XXX.Class的构造器就可以进行</description>
+    </item>
+    
+    <item>
+      <title>Spring-AOP</title>
+      <link>https://huanruiz.github.io/post/notes/24_Spring_AOP/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/24_Spring_AOP/</guid>
+      <description>概念 面向切面编程, 利用AOP可以对业务逻辑的各个部分进行隔离, 使业务逻辑各部分之间的耦合度降低. 在不修改源代码的情况下, 也可以在主干功能里面添加新功能. 动态代理 有接口的情况, 使用JDK动态代理. 创建接口实现类代理对象, 去增强类的方法. 没有接口的情况, 使用CGLIB动态代理; 创建子</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-位运算</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/14_%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
+      <pubDate>Sun, 17 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/14_%E4%BD%8D%E8%BF%90%E7%AE%97/</guid>
+      <description>面试题05.07. 配对交换 提取奇数位左移1位, 或上偶数位右移1位. class Solution { public int exchangeBits(int num) { return (((num &amp;amp; 0x55555555) &amp;lt;&amp;lt; 1) | ((num &amp;amp; 0xaaaaaaaa) &amp;gt;&amp;gt; 1)); } } 参考 labuladong算法 LeetCode刷题活动第二期Week2——位运算专题讲解 leetcode acwing</description>
+    </item>
+    
+    <item>
+      <title>Spring-IOC</title>
+      <link>https://huanruiz.github.io/post/notes/23_Spring_IOC/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/23_Spring_IOC/</guid>
+      <description>入门-创建对象 教育版的idea没有spring initializer, 建立普通Java工程就好. 创建好工程后将如下的jar文件(spring框架的依赖和日志依赖)添加进工程(project structure中). 新建User类. public class User { public void add() { System.out.println(&amp;quot;add......&amp;quot;); } } 在src目录下新建名为bean1.xml的文件, 内容</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-贪心算法</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/13_%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Fri, 15 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/13_%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</guid>
+      <description>贪心算法是动态规划的特殊情况, 因为贪心的每一步都需要选择最优解. 满足贪心选择性质, 就可以用贪心. 区间调度问题 435. 无重叠区间 按右边界从小到大排序, 要求接下来的每一个区间的左边界大于等于这个右边界才能符合条件. 不符合条件的区间的区间数量就是答案. class Solution { public int eraseOverlapIntervals(int[][] intervals) { if (intervals.length &amp;lt;= 1) return 0; int res = 0; Arrays.sort(intervals, (a,</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-字符串</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/12_%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/12_%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>参考 labuladong算法 LeetCode提高班第一期——Week5字符串处理专题 leetcode acwing</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-哈希表</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/11_%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
+      <pubDate>Tue, 12 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/11_%E5%93%88%E5%B8%8C%E8%A1%A8/</guid>
+      <description>1. 两数之和 class Solution { public int[] twoSum(int[] nums, int target) { HashMap&amp;lt;Integer, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); for (int i = 0; i &amp;lt; nums.length; i++) { if (map.containsKey(target - nums[i])) return new int[]{map.get(target - nums[i]), i}; map.put(nums[i], i); } return new int[2]; } } 顺便把3Sum, 4Sum也总结了. 15. 三数之和 实际上就是在确定一个值的基础上再做twoSum, 我这里改为了用双指针来做. 两个方法都要跳过连续的相同值, 目的是去重. 题目要求是和为0, 但实</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-数学系列</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/10_%E6%95%B0%E5%AD%A6%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Sat, 09 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/10_%E6%95%B0%E5%AD%A6%E7%B3%BB%E5%88%97/</guid>
+      <description>这部分来自于&amp;lt;LeetCode提高班第三期——Week3数学专题&amp;gt;, 有的题不需要数学方法, 用动态规划或者利用数据结构做更容易想象. 268. 丢失的数字 直接HashSet用$O(n)$时间搞定. 比较tricky的方法是用高斯公式求和在减去实际的数组内数字的和, 得到结果. class Solution { public</description>
+    </item>
+    
+    <item>
+      <title>DFS与BFS</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/9_DFS%E4%B8%8EBFS/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/9_DFS%E4%B8%8EBFS/</guid>
+      <description>回溯 DFS很多情况下会和回溯结合起来, 先通过全排列问题来构建回溯问题的框架. 我的理解中, 回溯实际上就是一种剪枝的技巧. 算法的本质依然是遍历. 选择开始遍历的节点, 可能有多个 构建回溯方法, 回溯的限制条件通常有visited, 数组的范围, 类似n皇后那种的其他限制条件 回溯中递归的终止条件</description>
+    </item>
+    
+    <item>
+      <title>Java Collection</title>
+      <link>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</guid>
+      <description>Collection Framework 首先根据图片感受一下整个collection的架构. Iterator Interface Collection接口扩展了Iterable接口, 目的还是为了操作其中的Iterator&amp;lt;T&amp;gt; iterator();这里主要关注Iterator而不是Iterable. 主要的抽象方法就是前两个, 如果c是某个</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法-数组系列</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/8_%E6%95%B0%E7%BB%84%E7%B3%BB%E5%88%97/</link>
+      <pubDate>Mon, 04 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/8_%E6%95%B0%E7%BB%84%E7%B3%BB%E5%88%97/</guid>
+      <description>naive双指针 26. 删除排序数组中的重复项 快慢指针, fast != slow就可以把slow的下一个重复的值删掉. class Solution { public int removeDuplicates(int[] nums) { if (nums.length == 0) return 0; int slow = 0, fast = 0; while (fast &amp;lt; nums.length) { if (nums[fast] != nums[slow]) { slow++; nums[slow] = nums[fast]; } fast++; } return slow + 1; } } 83. 删除排序链表中的重复元素 可以用类似26题的方法做. class Solution { public ListNode deleteDuplicates(ListNode head) { if (head == null) return head; ListNode slow = head, fast =</description>
+    </item>
+    
+    <item>
+      <title>栈队列堆</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/7_%E6%A0%88%E9%98%9F%E5%88%97%E5%A0%86/</link>
+      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/7_%E6%A0%88%E9%98%9F%E5%88%97%E5%A0%86/</guid>
+      <description>先用leetcode专题进行练习. 队列实现 622. 设计循环队列 利用循环队列节省空间, 可以复用申请的空间. class MyCircularQueue { private int[] queue; private int capacity; private int head; private int count; public MyCircularQueue(int k) { queue = new int[k]; capacity = k; head = 0; count = 0; } public boolean enQueue(int value) { if (count == capacity) return false; queue[(head + count) % capacity] = value; count += 1; return true; } public boolean deQueue() { if (count == 0) return false; head = (head + 1) % capacity; count -= 1; return true; } public int Front() { if (count == 0) return -1; return</description>
+    </item>
+    
+    <item>
+      <title>二分法</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/6_%E4%BA%8C%E5%88%86%E6%B3%95/</link>
+      <pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/6_%E4%BA%8C%E5%88%86%E6%B3%95/</guid>
+      <description>先用leetcode专题进行练习. 只要遇到了排了序的数组, 实际上都可以考虑能否用二分法加速. 704. 二分查找 首先做最基本的二分查找. class Solution { public int search(int[] nums, int target) { int left = 0, right = nums.length - 1; while (left &amp;lt;= right) { int mid = (right + left) / 2; if (nums[mid] == target) return mid; else if (nums[mid] &amp;lt; target) left = mid + 1; else if (nums[mid] &amp;gt; target) right = mid - 1; } return -1; } } 可以发现一共有三步: 预处理 —</description>
+    </item>
+    
+    <item>
+      <title>动态规划</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/5_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+      <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/5_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
+      <description>简单题 509. 斐波那契数/剑指Offer10-I. 斐波那契数列 没有用数列存储, 因为转台转移过程只与前两个值有关. class Solution { public int fib(int n) { if (n == 0) return 0; if (n == 1 || n == 2) return 1; int pre1 = 1, pre2 = 1, sum = 2; for (int i = 3; i &amp;lt;= n; i++) { sum = (pre1 + pre2) % 1000000007;//剑指的题要取余 pre1 = pre2; pre2 = sum; } return sum; } } 322. 零钱兑换 class</description>
+    </item>
+    
+    <item>
+      <title>数据结构-链表</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/</guid>
+      <description>翻转链表 迭代实现较为容易, 一般要用dummy做一个虚拟头指针, 因为头结点可能会变, 这里主要用来理解递归的方向来做. 我把base条件叫做终极情况, 这个终极情况是退出递归的最小子问题, 而次小子问题是极限情况, 也就是功能区的代码. 翻转链表一般都是后序遍历的思想, 函数的功能就是返回前一个</description>
+    </item>
+    
+    <item>
+      <title>数据结构-树</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/</link>
+      <pubDate>Tue, 15 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/3_%E6%A0%91/</guid>
+      <description>二叉树 前中后序遍历是树的基础, 关于树的题目首先要想好到底是用哪种遍历的思想, 遍历通常有三种实现方式, 以前序遍历举例. 递归实现 最常用的方式. class Solution { List&amp;lt;Integer&amp;gt; res = new ArrayList&amp;lt;Integer&amp;gt;(); public List&amp;lt;Integer&amp;gt; preorderTraversal(TreeNode root) { if (root == null) return new ArrayList&amp;lt;Integer&amp;gt;(); // base // pre, 功能部分可以替换 res.add(root.val); // function preorderTraversal(root.left); preorderTraversal(root.right); // result return res; } } 栈实现 相当于DFS去搜索. class Solution { public List&amp;lt;Integer&amp;gt; preorderTraversal(TreeNode root) { List&amp;lt;Integer&amp;gt; res = new ArrayList&amp;lt;&amp;gt;(); if (root</description>
+    </item>
+    
+    <item>
+      <title>排序算法</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/2_%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 12 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/2_%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</guid>
+      <description>总结几大排序算法. 主要对比时间复杂度和空间复杂度. 下图是排序算法属性的总结. (表格中希尔排序的部分存疑) 算法 平均时间复杂度 最坏情况 空间复杂度 排序方式 稳定性 冒泡排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 稳定 选择排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 不稳定 插入排序 $O(n^{2})$ $O(n^{2})$ $O(1)$ 内部 稳定 希尔排序 $O(nlogn)$ $O(nlog^{2}n)$ $O(1)$ 内部 不稳定 快速排序 $O(nlogn)$ $O(n^{2})$ $O(nlogn)$ 内部 不稳定 归并排序 $O(nlogn)$</description>
+    </item>
+    
+    <item>
+      <title>剑指offer</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/</guid>
+      <description>这是剑指offer第二版的刷题小总结, 对应leetcode上剑指Offer专题的题目. 括号内的数字对应主站中题目的序号, 没有注明的复杂度都是指时间复杂度. 树 07.重建二叉树: 构建二叉树, 用前序遍历. preorder确定根节点的值, inorder确定左子树的大小, 就能根据index</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-高级</title>
+      <link>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</guid>
+      <description>继续卖票 高内聚低耦合, 线程操作资源类. 操作指线程对外暴露的调用方法(高内聚). 线程之间低耦合. public class SaleTicket { public static void main(String[] args) { Ticket ticket = new Ticket(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;A&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;B&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;C&amp;quot;).start(); } } class Ticket { /</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-基础</title>
+      <link>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</guid>
+      <description>创建 方式1 创建继承Thread类的子类 重写Thread类的run() 创建Thread类的子类的对象 通过此对象调用start() public class ThreadBase { public static void main(String[] args) { MyThread t1 = new MyThread(); //t1.start(); //启动线程, 并调用当前线程的run() new Thread() { //直接创建Thread的匿名子类也可以 @Override public void run() { for (int i = 0; i &amp;lt; 100; i++) { System.out.println(&amp;quot;thread2&amp;quot; + &amp;quot;-&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>MySQL-高级</title>
+      <link>https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/</link>
+      <pubDate>Tue, 17 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/</guid>
+      <description>回顾 性能下降原因 查询写的不好 索引失效(单值, 符合) 关联查询过多join 服务器调优和参数设置不合适 SQL解析顺序 几种join 注意这种公有部分没有的情况. SELECT ... FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NULL; inner join: 只有公有 left join/right join: 公有加主表独有 full outer join: 全部join, MySQL不支持, 但是可以通过union left joi</description>
+    </item>
+    
+    <item>
+      <title>MySQL-基础</title>
+      <link>https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/</guid>
+      <description>MySQL的常见命令 查看当前所有的数据库: show databases; 打开指定的库: use 库名 查看当前库的所有表: show tables; 查看其它库的所有表: show tables from 库名; 创建表: create table 表名( 列名 列类型, 列名 列类型 ); 查看表结构: desc 表名; 查看服务器的版本 登录到mysql服务端: select version(); 没有登录到mysql服务端: mysql --version MySQL的语法规范</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-链路层</title>
+      <link>https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/</link>
+      <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/</guid>
+      <description>概述 运行链路层的主机/路由器/交换机等都叫结点(node), 连接相邻结点的通信信道叫链路. 数据报会被封装到链路层帧中并被传送到链路. 主体部分是网络适配器或者网络接口卡(NIC). 链路层提供的服务 framing. 链路接入, medium access control(MAC) protocol规定帧在链路上的传输规则. 可靠交付, 链路层提供可靠交</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-网络层</title>
+      <link>https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/</link>
+      <pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/</guid>
+      <description>网络层的分组是数据报, 一般由路由器把报文段封装成数据报, 或者从数据报提取报文段给运输层. 概述 转发与路由选择 转发: 分组到达路由器的输入链路时, 路由器把该分组移到合适的输出链路. 路由选择: 根据路由选择算法, 网络层决定分组从发送方到接收方的路径. 路由器根据**路由表(forwardin</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-运输层</title>
+      <link>https://huanruiz.github.io/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/</link>
+      <pubDate>Tue, 03 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/</guid>
+      <description>运输层协议为运行在不同的主机上的应用进程之间提供了逻辑通信(logic communication), 它是在端系统中被实现的, 发送端的运输层把报文转换为报文段(segment)(为了避免混淆, 把数据报这个名字给网络层), 并将报文段传输给网络层, 网络层将其封装为网络层分组(数据报)并向目的的发送, 注意网络层是不</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-应用层</title>
+      <link>https://huanruiz.github.io/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/</guid>
+      <description>协议管理 网络应用体系结构 有应用体系结构决定如何在端系统组织该应用程序. 包括客户-服务器体系结构和P2P体系结构. 客户-服务器体系结构: 主机总是打开服务其他客户主机的请求, 比如Web应用程序. 客户之间不会通信. 服务器具有固定, 周知的IP地址. 较大的应用会有配备大量主机的有数据中心.</description>
+    </item>
+    
+    <item>
+      <title>计算机网络-基础</title>
+      <link>https://huanruiz.github.io/post/notes/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/5_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%9F%BA%E7%A1%80/</guid>
+      <description>所有手机, 电脑, 平板都可以成为主机(host)或者端系统(end system), 他们通过通信链路和分组交换机连接在一起. 对于通信链路, 传输速率可以用bit/s或bps来衡量. 端系统互相通讯时会把数据分段, 为每段加上首部字节, 生成的包叫分组(packet). 分组交换机可以接受并转发分组, 包括路由</description>
+    </item>
+    
+    <item>
+      <title>操作系统-设备驱动与文件系统</title>
+      <link>https://huanruiz.github.io/post/notes/4_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/4_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
+      <description>I/O与显示器 使用外设通常就是CPU向外设发指令, 当外设完成后做中断处理程序. 有单片机背景的朋友应该会很熟悉这种模式, 通过i2总线, spi总线等等使挂载在总线上的设备或者传感器工作. 而对于计算机来说就是PCI总线. 向设备控制器的寄存器写很麻烦, 所以操作系统要给用户提供一个简单视图</description>
+    </item>
+    
+    <item>
+      <title>Java如何自定义排序</title>
+      <link>https://huanruiz.github.io/post/java/1_Java%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/1_Java%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F/</guid>
+      <description>Comparable接口 自定义的类自定义排序需要implementsComparable并且重写public int compareTo(Object o) String等包装类实现了Comparable接口, 重写了compareTo(obj)方法, 实现升序排列 compareTo(obj): 当前对象this大于形参对象obj, 返回正整数. 小于返回负整</description>
+    </item>
+    
+    <item>
+      <title>操作系统-内存管理</title>
+      <link>https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/3_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
+      <description>内存使用与分段 回顾冯诺依曼的取址执行, 计算机取址执行, 也就是将程序(从磁盘)放到内存中,PC指向开始地址. 如果有下面的代码, call 40所在的位置是0地址, _main所在的位置是40, 那么call 40就调用了_main所对应的指令. 然而这要求IP指针最初指向的call 40就在0, 显然不</description>
+    </item>
+    
+    <item>
+      <title>操作系统-进程与线程</title>
+      <link>https://huanruiz.github.io/post/notes/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/2_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</guid>
+      <description>使用CPU 如果CPU只是简单地取址执行, 很多时间就会浪费在IO上, 因为IO通常是机械动作, 而CPU是电路工作, 所以这样就会降低CPU的使用率. 所以我们希望多道程序交替地执行, 来提升CPU地利用率. 下图的数字就是时间单位, 可以看出多道程序比单道程序的CPU利用率/设备的利用率都有了</description>
+    </item>
+    
+    <item>
+      <title>操作系统-基础</title>
+      <link>https://huanruiz.github.io/post/notes/1_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/1_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%9F%BA%E7%A1%80/</guid>
+      <description>操作系统的课程来自哈工大的李志军老师, 视频和课件可以在B站找到, 配套的实验在蓝桥可以找到. 课程分为四个部分: 操作系统基础, 进程与线程, 内存管理, 设备驱动与文件系统. 视频部分有22小时. 操作系统发展 从图灵机到通用图灵机, 增加了控制器动作和状态, 控制器就可以通过不同的逻辑来操作数据.</description>
+    </item>
+    
+    <item>
+      <title>如何搭建Hugo博客并部署到Github Page</title>
+      <link>https://huanruiz.github.io/post/littletec/1_%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BAHugo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E5%88%B0github-page/</link>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/littletec/1_%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BAHugo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E5%88%B0github-page/</guid>
+      <description>因为Hexo博客又一次出现了问题, 在推油的推荐下, 我把个人博客迁移到了Hugo上. 我会根据复习的进度慢慢地把相关的笔记迁移到这里. Hugo的搭建过程非常简单, 可以参考官方文档. 我在这里进行一个简单的总结. 安装 我使用的macos进行搭建. 首先用下面的命令安装Hugo: brew install hugo 安装好之</description>
+    </item>
+    
+  </channel>
+</rss>

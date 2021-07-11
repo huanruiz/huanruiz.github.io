@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>链表 on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/</link>
+    <description>Recent content in 链表 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构-链表</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/4_%E9%93%BE%E8%A1%A8/</guid>
+      <description>翻转链表 迭代实现较为容易, 一般要用dummy做一个虚拟头指针, 因为头结点可能会变, 这里主要用来理解递归的方向来做. 我把base条件叫做终极情况, 这个终极情况是退出递归的最小子问题, 而次小子问题是极限情况, 也就是功能区的代码. 翻转链表一般都是后序遍历的思想, 函数的功能就是返回前一个</description>
+    </item>
+    
+  </channel>
+</rss>

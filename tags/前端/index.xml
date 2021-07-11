@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前端 on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 02 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSS tutorial</title>
+      <link>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/32_CSS-tutorial/</guid>
+      <description>CSS Overview CSS学习我打算纯靠看英文文档完成, 养成好习惯. CSS全称Cascading Style Sheets层叠级联样式表, 开始学习之前按照文档创建文件夹, 其中html文件用chrome打开, 编辑的时候用vscode, 用静态网站可以最快得测试效果. Selector: HTML element name Declaration: specifies which of the element&amp;rsquo;s properties you want to style Properties: ways in which you can style an</description>
+    </item>
+    
+    <item>
+      <title>HTML入门</title>
+      <link>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/</guid>
+      <description>简介 &amp;lt;!-- DOCTYPE: 告诉浏览器规范(可省略) --&amp;gt; &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;!-- 头 --&amp;gt; &amp;lt;head&amp;gt; &amp;lt;!-- 描述标签 --&amp;gt; &amp;lt;!-- 做SEO --&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;keywords&amp;quot; content=&amp;quot;First html&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;description&amp;quot; charset=&amp;quot;learning html&amp;quot;&amp;gt; &amp;lt;!-- 标题 --&amp;gt; &amp;lt;title&amp;gt;Title&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;!-- 主体 --&amp;gt; &amp;lt;body&amp;gt; Hello world! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 基础标签 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot; xmlns=&amp;quot;http://www.w3.org/1999/html&amp;quot;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt; &amp;lt;title&amp;gt;Basic Tag&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;!-- 标题标签 --&amp;gt; &amp;lt;h1&amp;gt;one&amp;lt;/h1&amp;gt; &amp;lt;h2&amp;gt;two&amp;lt;/h2&amp;gt; &amp;lt;h3&amp;gt;three&amp;lt;/h3&amp;gt; &amp;lt;h4&amp;gt;four&amp;lt;/h4&amp;gt; &amp;lt;h5&amp;gt;five&amp;lt;/h5&amp;gt; &amp;lt;h6&amp;gt;six&amp;lt;/h6&amp;gt; &amp;lt;!-- 段落标签 --&amp;gt; &amp;lt;p&amp;gt;Twinkle, twinkle, little star&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;How I wonder what you are&amp;lt;/p&amp;gt; &amp;lt;p&amp;gt;Up above the world so high&amp;lt;/p&amp;gt; &amp;lt;!-- 水平线标签 --&amp;gt; &amp;lt;hr/&amp;gt; &amp;lt;!-- 换行标签 --&amp;gt; Like a diamond in the sky&amp;lt;/br&amp;gt; Twinkle, twinkle little star&amp;lt;/br&amp;gt; How I</description>
+    </item>
+    
+  </channel>
+</rss>

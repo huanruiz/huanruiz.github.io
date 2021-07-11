@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/Java/</link>
+    <description>Recent content in Java on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 09 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/Java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mybatis入门</title>
+      <link>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/</guid>
+      <description>MyBatis是一款优秀的持久层框架, 它支持自定义SQL/存储过程以及高级映射. MyBatis免除了几乎所有的JDBC代码以及设置参数和获取结果集的工作. MyBatis可以通过简单的XML或注解来配置和映射原始类型/接口和Java POJO为数据库中的记录. (官网介绍) 第一个Myb</description>
+    </item>
+    
+    <item>
+      <title>Java Collection</title>
+      <link>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</link>
+      <pubDate>Fri, 08 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/java/2_Java%E9%9B%86%E5%90%88%E7%B1%BB/</guid>
+      <description>Collection Framework 首先根据图片感受一下整个collection的架构. Iterator Interface Collection接口扩展了Iterable接口, 目的还是为了操作其中的Iterator&amp;lt;T&amp;gt; iterator();这里主要关注Iterator而不是Iterable. 主要的抽象方法就是前两个, 如果c是某个</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-高级</title>
+      <link>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/26_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%AB%98%E7%BA%A7/</guid>
+      <description>继续卖票 高内聚低耦合, 线程操作资源类. 操作指线程对外暴露的调用方法(高内聚). 线程之间低耦合. public class SaleTicket { public static void main(String[] args) { Ticket ticket = new Ticket(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;A&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;B&amp;quot;).start(); new Thread(new Runnable() { @Override public void run() { for (int i = 1; i &amp;lt; 40; i++) { ticket.saleTicket(); } } }, &amp;quot;C&amp;quot;).start(); } } class Ticket { /</description>
+    </item>
+    
+    <item>
+      <title>Java多线程-基础</title>
+      <link>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Mon, 30 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/25_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80/</guid>
+      <description>创建 方式1 创建继承Thread类的子类 重写Thread类的run() 创建Thread类的子类的对象 通过此对象调用start() public class ThreadBase { public static void main(String[] args) { MyThread t1 = new MyThread(); //t1.start(); //启动线程, 并调用当前线程的run() new Thread() { //直接创建Thread的匿名子类也可以 @Override public void run() { for (int i = 0; i &amp;lt; 100; i++) { System.out.println(&amp;quot;thread2&amp;quot; + &amp;quot;-&amp;quot;</description>
+    </item>
+    
+  </channel>
+</rss>

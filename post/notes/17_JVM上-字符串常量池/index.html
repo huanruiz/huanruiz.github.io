@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>JVM上-字符串常量池 | PunchCode</title>
+    <meta property="og:title" content="JVM上-字符串常量池 - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-01-29T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-01-29T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="JVM上-字符串常量池">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#不可变性">不可变性</a></li>
+    <li><a href="#字符串拼接">字符串拼接</a></li>
+    <li><a href="#intern方法">intern方法</a></li>
+    <li><a href="#几个问题">几个问题</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#空间效率">空间效率</a></li>
+    <li><a href="#垃圾回收">垃圾回收</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">JVM上-字符串常量池</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年1月29日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <p>String比较特殊, 具有不可变性(声明为final), 并且实现了Serializable接口(支持序列化), Comparable接口(可比较), 在介绍GC之前单独拿出来研究. 在jdk8中, String其实就是一个char的数组; jdk9中, String变成了byte数组, 因为像英文字母其实只需要一个byte存储, 如果用char存储, 那么另一个byte的空间就浪费了. 所以jdk9中ISO-8859-1/Latin-1编码就用一个byte存储; 而UTF-16, 就用byte+encoding-flag来表示一个字符, encoding-flag用来指明用哪个字符集.</p>
+<h2 id="不可变性">不可变性</h2>
+<p>字符串常量池是不会存储相同字符串的. String在jdk7及之后储存在堆中的, 之前在方法区永久代. 为什么不放jdk7不放永久代, 因为永久代默认比较小, 而且垃圾回收频率低. 虽然常量池也在堆中, 但是为了方便, 后面描述jdk7及以后的字符串常量池和堆这些说法的时候, 默认堆指的是常量池以外的堆.</p>
+<pre><code>public class StringTest1 {
+    public void test1() {
+        String s1 = &quot;abc&quot;; //字面量定义的方式, &quot;abc&quot;存储在字符串常量池中
+        String s2 = &quot;abc&quot;;
+        s1 = &quot;hello&quot;;
+
+        System.out.println(s1 == s2); //判断地址: true变false
+        System.out.println(s1); //hello重新声明新的空间
+        System.out.println(s2); //abc
+    }
+
+    public void test2() {
+        String s1 = &quot;abc&quot;;
+        String s2 = &quot;abc&quot;;
+        s2 += &quot;def&quot;;
+        System.out.println(s2); //abcdef重新声明新的空间
+        System.out.println(s1); //abc
+    }
+
+    public void test3() {
+        String s1 = &quot;abc&quot;;
+        String s2 = s1.replace('a', 'm');
+        System.out.println(s1); //abc
+        System.out.println(s2); //mbc
+    }
+}
+</code></pre><blockquote>
+<p>String Pool是一个固定大小的Hashtable, 如果放进StringPool的String非常多, 会造成Hash冲突, 导致链表变长, 调用String和intern的性能就会大幅下降. 在jdk6中, StringTable的长度默认值是1009; 在jdk7中, StringTable的长度默认值是60013; jdk8开始, 1009是StringTable可设置的最小值. <strong>使用-XX: StringTableSize可设置StringTable的长度</strong>.</p>
+</blockquote>
+<p>Java语言中有8种基本数据类型和一种比较特殊的类型String, 为了使它们在运行过程中速度更快, 更节省内存, 都提供了一种常量池的概念. 在jdk6中如果内存爆了, 会出现<code>OutOfMemoryError: PermGen space</code>, jdk7及之后内存爆了会出现<code>OutOfMemoryError: Java heap space</code>, 证明字符串常量池的位置从永久代移动到了堆空间. 移动的原因主要是永久代空间较小而且垃圾回收频率不高.</p>
+<p>继续测试不变性, 下面代码的数字代表debug时的memory count大小, 注意不是从0开始的. Java语言规范规定相同的字符创字面量应该包含同样的Unicode字符序列(包含同一份码点序列常量), 并且必须指向同一个String类实例.</p>
+<pre><code>public static void main(String[] args) {
+    System.out.println(); //2293
+    System.out.println(&quot;1&quot;); //2294
+    System.out.println(&quot;2&quot;); //2295
+    System.out.println(&quot;3&quot;); //2297
+    //内存没有增加
+    System.out.println(&quot;1&quot;); //2297
+    System.out.println(&quot;2&quot;); //2297
+}
+</code></pre><p>官方案例:</p>
+<pre><code>class Memory {
+    public static void main(String[] args) {//line 1
+        int i = 1;//line 2
+        Object obj = new Object();//line 3
+        Memory mem = new Memory();//line 4
+        mem.foo(obj);//line 5
+    }//line 9
+
+    private void foo(Object param) {//line 6
+        String str = param.toString();//line 7 堆中字符串常量创建对象
+        System.out.println(str);
+    }//line 8
+}
+</code></pre><p>
+        <img class="mx-auto" alt="" src="/notes/notes17_1.png" />   
+    </p>
+<h2 id="字符串拼接">字符串拼接</h2>
+<ol>
+<li>常量与常量的拼接结果在常量池, 因为经过了<strong>编译期优化</strong>.</li>
+<li>常量池中不会存在相同内容的常量.</li>
+<li><strong>只要其中有一个是变量, 结果就在非常量池的堆中</strong>. 变量拼接的原理是StringBuilder.</li>
+<li>如果拼接的结果调用intern()方法, 则主动将常量池中还没有的字符串对象放入池中, 并返回此对象地址.</li>
+</ol>
+<pre><code>public void test1() {
+    String s1 = &quot;a&quot; + &quot;b&quot; + &quot;c&quot;; //等同于&quot;abc&quot;(编译期优化), 字节码命令是ldc #2&lt;abc&gt;
+    String s2 = &quot;abc&quot;; //&quot;abc&quot;一定是放在字符串常量池中，将此地址赋给s2
+    
+    System.out.println(s1 == s2); //true
+    System.out.println(s1.equals(s2)); //true
+}
+
+public void test2() {
+    String s1 = &quot;javaEE&quot;;
+    String s2 = &quot;hadoop&quot;;
+
+    String s3 = &quot;javaEEhadoop&quot;;
+    String s4 = &quot;javaEE&quot; + &quot;hadoop&quot;; //编译期优化
+    String s5 = s1 + &quot;hadoop&quot;; //相当于在堆空间中new String(), 具体的内容为拼接的结果: javaEEhadoop, 不在常量池中
+    String s6 = &quot;javaEE&quot; + s2;
+    String s7 = s1 + s2;
+
+    System.out.println(s3 == s4);//true
+    System.out.println(s3 == s5);//false
+    System.out.println(s3 == s6);//false
+    System.out.println(s3 == s7);//false
+    System.out.println(s5 == s6);//false
+    System.out.println(s5 == s7);//false
+    System.out.println(s6 == s7);//false
+    
+    String s8 = s6.intern(); //intern(): 判断字符串常量池中是否存在javaEEhadoop值, 如果存在, 则返回常量池中javaEEhadoop的地址;
+    //如果字符串常量池中不存在javaEEhadoop, 则在常量池中加载一份javaEEhadoop, 并返回次对象的地址.
+    System.out.println(s3 == s8);//true
+}
+
+/*
+    s1+s2的执行细节(s1和s2都是变量):
+    1. StringBuilder s = new StringBuilder();
+    2. s.append(&quot;a&quot;)
+    3. s.append(&quot;b&quot;)
+    4. s.toString() -&gt; 类似new String(&quot;ab&quot;)
+
+    注意在jdk5.0之后使用的是StringBuilder, 在jdk5.0之前使用的是StringBuffer
+*/
+public void test3() {
+    String s1 = &quot;a&quot;;
+    String s2 = &quot;b&quot;;
+    String s3 = &quot;ab&quot;;
+
+    String s4 = s1 + s2;
+    System.out.println(s3 == s4); //false
+}
+
+/*
+    1. 字符串拼接操作不一定使用的是StringBuilder, 如果拼接符号左右两边都是字符串常量或常量引用(test4的s1和s2), 则仍然使用编译期优化
+    2. 针对于final修饰类, 方法, 基本数据类型, 引用数据类型的量的结构时, 能使用上final就用; 为了在编译器就初始化值, 也就是在类加载器的linking中的prepare阶段就初始化.
+*/
+public void test4() {
+    final String s1 = &quot;a&quot;;
+    final String s2 = &quot;b&quot;;
+    String s3 = &quot;ab&quot;;
+    String s4 = s1 + s2;
+    System.out.println(s3 == s4);//true
+}
+
+// test5原理和test4类似
+public void test5() {
+    String s1 = &quot;javaEEhadoop&quot;;
+    String s2 = &quot;javaEE&quot;;
+    String s3 = s2 + &quot;hadoop&quot;;
+    System.out.println(s1 == s3); //false
+
+    final String s4 = &quot;javaEE&quot;; //s4:常量
+    String s5 = s4 + &quot;hadoop&quot;;
+    System.out.println(s1 == s5); //true
+}
+</code></pre><p>注意<strong>append效率要比字符串拼接高</strong>. 因为StringBuilder的append()的方式自始至终中只创建过一个StringBuilder的对象, 而字符串拼接方式: 内存中由于创建了较多的StringBuilder和String的对象, 内存占用更大, 如果有垃圾回收就会花费额外的时间. 在实际开发中, 如果确定要前后添加的字符串长度不高于某个限定值highLevel的情况下, 建议使用构造器实例化: StringBuilder s = new StringBuilder(highLevel); //new char[highLevel]. 这样就避免的扩容的操作.</p>
+<h2 id="intern方法">intern方法</h2>
+<p>如果不是用双引号声明的String对象, 可以使用String提供的intern方法, intern方法会从字符串常量池中查询当前字符串是否存在(用equals方法判断), 若不存在就会将当前字符串放入常量池中.</p>
+<pre><code>// 为了保证变量s指向字符串常量池数据, 可以用字面量定义方式
+String s = &quot;test&quot;
+
+// 或者调用intern
+String s  = new String(&quot;test&quot;).intern();
+String s = new StringBuilder(&quot;test&quot;).toString().intern();
+</code></pre><h2 id="几个问题">几个问题</h2>
+<p><em><strong>new String(&ldquo;ab&rdquo;)会创建几个对象?</strong></em> 看字节码, 有两个. 一个对象是new关键字在堆空间创建的; 另一个对象是字符串常量池中的对象&quot;ab&quot;(对应字节码命令ldc).</p>
+<p><em><strong>new String(&ldquo;a&rdquo;)+new String(&ldquo;b&rdquo;)会创建几个对象?</strong></em> : 对象1: StringBuilder(因为有拼接操作); 对象2: new String(&ldquo;a&rdquo;); 对象3: 常量池中的&quot;a&quot;; 对象4: new String(&ldquo;b&rdquo;); 对象5: 常量池中的&quot;b&quot;.</p>
+<p>其实<code>StringBuilder()</code>的底层也通过new String(&ldquo;ab&rdquo;)从创建了对象, 但是&quot;ab&quot;本身是不在字符串常量池的, 因为字节码命令中没有ldc.</p>
+<p><em><strong>想为什么出现下面代码的结果</strong></em></p>
+<pre><code>/**
+ * 如何保证变量s指向的是字符串常量池中的数据呢？
+ * 有两种方式：
+ * 方式一： String s = &quot;test&quot;;//字面量定义的方式
+ * 方式二： 调用intern()
+ *         String s = new String(&quot;test&quot;).intern();
+ *         String s = new StringBuilder(&quot;test&quot;).toString().intern();
+ */
+public class StringIntern {
+    public static void main(String[] args) {
+        String s = new String(&quot;1&quot;); //s 指向堆空间&quot;1&quot;的内存地址
+        String s1 = s.intern(); //s1 指向字符串常量池中&quot;1&quot;的内存地址, 因为上一行使&quot;1&quot;已经存在于字符串常量池了
+        String s2 = &quot;1&quot;; //s2 指向字符串常量池已存在的&quot;1&quot;的内存地址, 所以s1==s2        
+        
+        System.out.println(s == s2); //jdk6: false  jdk7/8: false
+        System.out.println(s1 == s2);//jdk6: true  jdk7/8: true
+
+        // s3变量记录的地址为: new String(&quot;11&quot;)
+        String s3 = new String(&quot;1&quot;) + new String(&quot;1&quot;); //字符串常量池中不存在&quot;11&quot;, 只有&quot;1&quot;
+
+        //jdk6: 创建了一个新的对象&quot;11&quot;, 也就有新的地址, &quot;11&quot;在永久代
+        //jdk7: 此时常量池中并没有创建&quot;11&quot;, 而是创建一个指向堆空间中new String(&quot;11&quot;)的地址, 因为堆空间有了&quot;11&quot;, 常量池只要用指针指向new的堆空间的&quot;11&quot;即可
+        s3.intern();
+
+        String s4 = &quot;11&quot;; //使用的是上一行代码执行时, 在常量池中生成的&quot;11&quot;的地址
+        System.out.println(s3 == s4); //jdk6: false  jdk7/8: true
+    }
+}
+</code></pre><p>再来一段代码, s3.intern()在不同位置结果一样吗?</p>
+<pre><code>public class StringIntern1 {
+    public static void main(String[] args) {
+        String s3 = new String(&quot;1&quot;) + new String(&quot;1&quot;); 
+        // s3.intern(); // 字符创常量池创建&quot;11&quot;指向外面的堆中的s3
+        String s4 = &quot;11&quot;;
+        // s3.intern(); // 字符创常量池没有&quot;11&quot;, 只有造个新的
+        System.out.println(s3 == s4); //s3在前true, 在后false
+    }
+}
+</code></pre><h2 id="总结">总结</h2>
+<ul>
+<li>jdk1.6中, 将这个字符串对象尝试放入串池: <strong>如果字符串常量池中有, 则并不会放入, 返回已有的池中的对象的地址; 如果没有, 会把此对象复制一份, 放入池, 并返回池中的对象地址.</strong></li>
+<li>Jdk1.7起, 将这个字符串对象尝试放入串池: <strong>如果字符串常量池中有, 则并不会放入, 返回已有的池中的对象的地址; 如果没有, 则会把对象的引用地址复制一份, 放入串池, 并返回串池中的引用地址.</strong></li>
+</ul>
+<h2 id="空间效率">空间效率</h2>
+<p>如果需要内存中存储大量的字符串, 这时候如果字符串都调用intern()方法, 就会明显降低内存的大小, 也就是省空间. 因为有一些new的String在池外面的堆中, 可以被回收.</p>
+<h2 id="垃圾回收">垃圾回收</h2>
+<p>增加下面代码循环数(j的大小), 就可以看到有GC发生. 垃圾回收器G1能自动持续对String有去重操作, 很明显常量池是没有去重的, 去重发生在池外的堆中.</p>
+<ul>
+<li>UseStringDeduplication(bool): 开启String去重(默认是不开启).</li>
+<li>PrintStringDedupl icationStatistics(bool): 打印详细的去重统计信息.</li>
+<li>tringDedupl icationAgeThreshold(uintx): 达到这个年龄的string对象被认为是去重的候选对象.</li>
+</ul>
+<pre><code>/**
+ * String的垃圾回收:
+ * -Xms15m -Xmx15m -XX:+PrintStringTableStatistics -XX:+PrintGCDetails
+ */
+public class StringGCTest {
+    public static void main(String[] args) {
+        for (int j = 0; j &lt; 100000; j++) {
+            String.valueOf(j).intern();
+        }
+    }
+}
+</code></pre><h2 id="参考">参考</h2>
+<ol>
+<li><a href="https://www.bilibili.com/video/BV1PJ411n7xZ?p=1">尚硅谷最新版宋红康JVM教程</a></li>
+<li><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/index.html">The Java® Virtual Machine Specification</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/">https://huanruiz.github.io/post/notes/17_JVM%E4%B8%8A-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/notes/16_JVM%E4%B8%8A-%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E/">JVM上-执行引擎</a></li>
+        
+        <li><a href="/post/notes/15_JVM%E4%B8%8A-%E5%AF%B9%E8%B1%A1%E5%AE%9E%E4%BE%8B%E5%8C%96/">JVM上-对象实例化与直接内存</a></li>
+        
+        <li><a href="/post/notes/14_JVM%E4%B8%8A-%E6%96%B9%E6%B3%95%E5%8C%BA/">JVM上-方法区</a></li>
+        
+        <li><a href="/post/notes/13_JVM%E4%B8%8A-%E5%A0%86/">JVM上-堆</a></li>
+        
+        <li><a href="/post/notes/12_JVM%E4%B8%8A-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E6%A6%82%E8%BF%B0%E5%8F%8A%E7%BA%BF%E7%A8%8B/">JVM上-运行时数据区概述及线程</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/JVM'>JVM</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>剑指offer on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/</link>
+    <description>Recent content in 剑指offer on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>剑指offer</title>
+      <link>https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/</link>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/datastructure_algorithm/1_%E5%89%91%E6%8C%87offer/</guid>
+      <description>这是剑指offer第二版的刷题小总结, 对应leetcode上剑指Offer专题的题目. 括号内的数字对应主站中题目的序号, 没有注明的复杂度都是指时间复杂度. 树 07.重建二叉树: 构建二叉树, 用前序遍历. preorder确定根节点的值, inorder确定左子树的大小, 就能根据index</description>
+    </item>
+    
+  </channel>
+</rss>

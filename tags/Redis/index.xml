@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/Redis/</link>
+    <description>Recent content in Redis on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 15 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/Redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis入门</title>
+      <link>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Tue, 15 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/</guid>
+      <description>NoSQL方便扩展, 因为不像关系型数据库中的数据, 互相之间会有关联. 性能高, 而且数据类型多种多样, 不用提前设计. Redis代表Remote Dictionary Server. 可以用内存存储/持久化(rdb/aof), 效率高, 集成发布订阅系统, 有计时器和计数器. 有多重数据类型, 支持集群/事务. 传统的RDBMS: 有</description>
+    </item>
+    
+  </channel>
+</rss>

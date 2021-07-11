@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring on PunchCode</title>
+    <link>https://huanruiz.github.io/tags/Spring/</link>
+    <description>Recent content in Spring on PunchCode</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 22 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://huanruiz.github.io/tags/Spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring-AOP</title>
+      <link>https://huanruiz.github.io/post/notes/24_Spring_AOP/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/24_Spring_AOP/</guid>
+      <description>概念 面向切面编程, 利用AOP可以对业务逻辑的各个部分进行隔离, 使业务逻辑各部分之间的耦合度降低. 在不修改源代码的情况下, 也可以在主干功能里面添加新功能. 动态代理 有接口的情况, 使用JDK动态代理. 创建接口实现类代理对象, 去增强类的方法. 没有接口的情况, 使用CGLIB动态代理; 创建子</description>
+    </item>
+    
+    <item>
+      <title>Spring-IOC</title>
+      <link>https://huanruiz.github.io/post/notes/23_Spring_IOC/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://huanruiz.github.io/post/notes/23_Spring_IOC/</guid>
+      <description>入门-创建对象 教育版的idea没有spring initializer, 建立普通Java工程就好. 创建好工程后将如下的jar文件(spring框架的依赖和日志依赖)添加进工程(project structure中). 新建User类. public class User { public void add() { System.out.println(&amp;quot;add......&amp;quot;); } } 在src目录下新建名为bean1.xml的文件, 内容</description>
+    </item>
+    
+  </channel>
+</rss>

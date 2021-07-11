@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>MySQL-高级 | PunchCode</title>
+    <meta property="og:title" content="MySQL-高级 - PunchCode">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2020-11-17T00:00:00&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2020-11-17T00:00:00&#43;08:00'>
+        
+    <meta name="Keywords" content="这也不会 那也不会">
+    <meta name="description" content="MySQL-高级">
+        
+    <meta name="author" content="拳头">
+    <meta property="og:url" content="https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+        <link rel="stylesheet" href='/css/douban.css'>
+    
+        <link rel="stylesheet" href='/css/other.css'>
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://huanruiz.github.io">
+                        PunchCode
+                    </a>
+                
+                <p class="description">Software Engineer</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://huanruiz.github.io">首页</a>
+                    
+                    <a  href="https://huanruiz.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://huanruiz.github.io/about/" title="About">About</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    <style type="text/css">
+    .post-toc {
+        position: fixed;
+        width: 200px;
+        margin-left: -210px;
+        padding: 5px 10px;
+        font-family: Athelas, STHeiti, Microsoft Yahei, serif;
+        font-size: 12px;
+        border: 1px solid rgba(0, 0, 0, .07);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.98);
+        background-clip: padding-box;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, .125);
+        word-wrap: break-word;
+        white-space: nowrap;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 999;
+        cursor: pointer;
+        max-height: 70%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .post-toc .post-toc-title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .post-toc .post-toc-content {
+        font-size: 15px;
+    }
+
+    .post-toc .post-toc-content>nav>ul {
+        margin: 10px 0;
+    }
+
+    .post-toc .post-toc-content ul {
+        padding-left: 20px;
+        list-style: square;
+        margin: 0.5em;
+        line-height: 1.8em;
+    }
+
+    .post-toc .post-toc-content ul ul {
+        padding-left: 15px;
+        display: none;
+    }
+
+    @media print,
+    screen and (max-width:1057px) {
+        .post-toc {
+            display: none;
+        }
+    }
+</style>
+<div class="post-toc" style="position: absolute; top: 188px;">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#回顾">回顾</a>
+      <ul>
+        <li><a href="#性能下降原因">性能下降原因</a></li>
+        <li><a href="#sql解析顺序">SQL解析顺序</a></li>
+        <li><a href="#几种join">几种join</a></li>
+      </ul>
+    </li>
+    <li><a href="#索引简介">索引简介</a>
+      <ul>
+        <li><a href="#语法">语法</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql索引结构">MySQL索引结构</a>
+      <ul>
+        <li><a href="#b树">B树</a></li>
+        <li><a href="#b树-1">B+树</a></li>
+        <li><a href="#why-not-hash">why not hash?</a></li>
+        <li><a href="#why-not-bst">why not BST?</a></li>
+        <li><a href="#why-not-b-tree">why not B-tree?</a></li>
+        <li><a href="#用不用">用/不用?</a></li>
+        <li><a href="#性能分析">性能分析</a></li>
+        <li><a href="#避免索引失效">避免索引失效</a></li>
+      </ul>
+    </li>
+    <li><a href="#查询截取分析">查询截取分析</a>
+      <ul>
+        <li><a href="#inexists">in/exists</a></li>
+        <li><a href="#order-by">order by</a></li>
+        <li><a href="#group-by">group by</a></li>
+        <li><a href="#慢查询日志">慢查询日志</a></li>
+      </ul>
+    </li>
+    <li><a href="#锁机制">锁机制</a>
+      <ul>
+        <li><a href="#表锁">表锁</a></li>
+        <li><a href="#行锁">行锁</a></li>
+      </ul>
+    </li>
+    <li><a href="#主从复制">主从复制</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var postToc = $(".post-toc");
+        if (postToc.length) {
+            var leftPos = $("#main").offset().left;
+            if(leftPos<220){
+                postToc.css({"width":leftPos-10,"margin-left":(0-leftPos)})
+            }
+
+            var t = postToc.offset().top - 20,
+                a = {
+                    start: {
+                        position: "absolute",
+                        top: t
+                    },
+                    process: {
+                        position: "fixed",
+                        top: 20
+                    },
+                };
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                e < t ? postToc.css(a.start) : postToc.css(a.process)
+            })
+        }
+    })
+</script>
+    <article class="post">
+        <header>
+            <h1 class="post-title">MySQL-高级</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年11月17日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0'>学习笔记</a></span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="clear" style="display: none">
+            <div class="toc-article">
+                <div class="toc-title">文章目录</div>
+            </div>
+        </div>
+        
+        <div class="post-content">
+            <h2 id="回顾">回顾</h2>
+<h3 id="性能下降原因">性能下降原因</h3>
+<ol>
+<li>查询写的不好</li>
+<li>索引失效(单值, 符合)</li>
+<li>关联查询过多join</li>
+<li>服务器调优和参数设置不合适</li>
+</ol>
+<h3 id="sql解析顺序">SQL解析顺序</h3>
+<p>
+        <img class="mx-auto" alt="" src="/notes/notes2_1.png" />   
+    </p>
+<h3 id="几种join">几种join</h3>
+<p>注意这种公有部分没有的情况.</p>
+<pre><code>SELECT ...
+FROM A 
+LEFT JOIN B ON A.key = B.key
+WHERE B.key IS NULL;
+</code></pre><ul>
+<li>inner join: 只有公有</li>
+<li>left join/right join: 公有加主表独有</li>
+<li>full outer join: 全部join, MySQL不支持, 但是可以通过union left join和right join实现, union本来就可以去重, 所以交集重复不考虑</li>
+</ul>
+<h2 id="索引简介">索引简介</h2>
+<p>类似字典, 提高搜索效率, 减少i/o. 通过索引列进行排序, 降低数据库排序成本, 减低CPU消耗.</p>
+<ul>
+<li>单值索引: 一个索引只包含单个列, 一个表可以有多个单列索引(还有复合索引, 复合的排序顺序和声明的顺序一致)</li>
+<li>唯一索引: 索引列值唯一, 允许空值</li>
+</ul>
+<h3 id="语法">语法</h3>
+<ul>
+<li>创建: <code>CREATE [UNIQUE] INDEX indexName ON table(columnname1, columnname2...);</code>/<code>ALTER table ADD [UNIQUE] INDEX [indexName] ON (columnname1, columnname2...);</code></li>
+<li>删除: <code>DROP INDEX [indexName] ON table;</code></li>
+<li>查看: <code>SHOW INDEX FROM table;</code></li>
+<li>修改: <code>ALTER TABLE table ADD PRIMARY KEY(column_list);</code>/<code>ALTER TABLE table ADD [UNIQUE]/[INDEX]/[FULL TEXT] index_name (column_list);</code>: 全文索引</li>
+</ul>
+<h2 id="mysql索引结构">MySQL索引结构</h2>
+<p>底层是B+树.</p>
+<h3 id="b树">B树</h3>
+<p>假设阶数为m, 插入的时候往叶子节点插入, 如果叶子节点的key数量等于m, 那么需要从中间key断开. key数量必须小于等于$m-1$个, 大于等于$ceil(m/2)-1$个. 所以删除时, 如果key数量不够, 需要从父节点拖一个下来.</p>
+<h3 id="b树-1">B+树</h3>
+<p>和B树基础一样, 但是除了叶子节点, 其他节点不存数据, 只存索引. 索引大小是子节点key的第一个值, 子节点的开头结点除外, 应该均小于父节点的第一个key. 插入类似B树, 删除时如果不满足大于等于$ceil(m/2)-1$个key的条件, 只需要将叶子节点的一个key拖过来, 在修改索引即可.</p>
+<h3 id="why-not-hash">why not hash?</h3>
+<p>因为它对于**顺序(order by)/范围查询(大于/小于)**性能会非常差, 没有多值索引那样的情况了, 导致全表扫描降低性能. 而b+树能保证能够保证数据按照键的顺序存储, 只需要查找某个范围的值就可以了.</p>
+<h3 id="why-not-bst">why not BST?</h3>
+<p>磁盘里的数据加载到内存中的时候, 是以页为单位来加载的, 像之前操作系统中是用的linux0.11为4kb. 对于BST, 每个节点所在的页是不连续的, 所以会一直进行磁盘寻址的操作. 而对于b树/b+树, 一个节点可以存放多个元素, 磁盘寻址操作就会减小. 因为内存速度是很快的, 所以即使b树/b+树看似比BST的比较次数更多, 但是磁盘操作次数少, 所以b树/b+树还是更快. 进而, 在设计的时候也倾向于让树的高度越小越好, 减少磁盘i/o.</p>
+<h3 id="why-not-b-tree">why not B-tree?</h3>
+<p>首先, B树和B+树最大的区别就是一个在节点上存数据, 一个只在叶子节点存数据. 那么在用B树查找时, 会进行很多局部的中序遍历, 因为顺序的数据可能存储在不同层的节点上, 而对于B+树, 因为数据都在叶子节点上, 并且叶子节点构成有序的链表, 所以只要找到查找数据的首尾, 就能通过链表找到所有的数据.</p>
+<h3 id="用不用">用/不用?</h3>
+<p>用:</p>
+<ul>
+<li>主键自动建立唯一索引</li>
+<li>频繁所谓查询条件</li>
+<li>查询与其他相连字段, 外键关系建立索引</li>
+<li>查询中排序的字段</li>
+<li>查询中统计和分组字段</li>
+</ul>
+<p>不用:</p>
+<ul>
+<li>频繁更新(否则每次更新还要保存索引)</li>
+<li>在where中用不到</li>
+<li>表记录少</li>
+<li>数据重复且平均分布的字段, 建立了索引用处也不大</li>
+</ul>
+<h3 id="性能分析">性能分析</h3>
+<p>默认有<strong>MySQL Query Optiomizer</strong>, 去优化query, 但不一定是最优的. MySQL一般瓶颈是CPU, IO, 服务器硬件. 我们可以用<code>EXPLAIN</code>来为查询设置标记, 使MySQL返回执行计划每一步的信息. 我只写了简单的查询, 所以只有一行. 下面介绍各个表项.
+
+        <img class="mx-auto" alt="" src="/notes/notes2_2.png" />   
+    </p>
+<h4 id="id">id</h4>
+<p>判断执行顺序的时候, 如果有多行, 那么对于id一样的行, 执行顺序由上到下. 而对于不同id, 大的id会先被执行. 如果表名是<code>&lt;derived2&gt;</code>, 则对应id为<code>2</code>的衍生表.</p>
+<h4 id="select_type">select_type</h4>
+<ul>
+<li>SIMPLE: 简单select查询, 不包含子查询或者UNION</li>
+<li>PRIMARY: 查询中包含子部分, 最外层就是PRIMARY</li>
+<li>SUBQUERY: 在select或where中包含子查询</li>
+<li>DERIVED: from列表中包含的子查询, 被MySQL递归执行, 结果放在临时表中</li>
+<li>UNION: UNION之后的select. 若UNION在FROM子句的子查询中, 外层select被标记为DERIVED</li>
+<li>UNION RESULT: 从UNION表获取结果的select</li>
+</ul>
+<h4 id="table">table</h4>
+<p>表名</p>
+<h4 id="type">type</h4>
+<p>性能从好到坏: system&gt;const&gt;eq_ref&gt;ref&gt;range&gt;index&gt;ALL</p>
+<ul>
+<li>system: 表只有一行记录(等于系统表), const的特例</li>
+<li>const: 通过索引一次就找到了, 用于比较primary key或unique索引. 只匹配一行数据, 所以快. (如主键在where中查询)</li>
+<li>eq_ref: 唯一性索引扫描, 对每个索引键只有<strong>一条记录</strong>与之匹配.</li>
+<li>ref: 非唯一性索引扫描, 返回匹配单个值的所有行. 可能有多个符合条件的行, 是查找和扫描的结合.</li>
+<li>range: 只检索给定范围的行. key列显示使用了哪个索引, 一般是在where中出现了between/&lt;/&gt;/in等的查询</li>
+<li>index: full index scan. 只遍历索引树, 通常比all快, 因为索引文件通常小于数据文件</li>
+<li>all: full table scan. 从硬盘中读取, 遍历全表找到匹配的行. (如果没用索引, 表上百万级别, 出现all一定要优化)</li>
+</ul>
+<h4 id="possible_keyskey">possible_keys/key</h4>
+<p><strong>possible_keys</strong>是<strong>理论上可能应用</strong>到这张表的索引, 一个或多个. 而key是<strong>实际使用</strong>的索引, 若为NULL, 就是没有使用索引. 如果<strong>覆盖索引</strong>, 则只出现在key中.</p>
+<blockquote>
+<p>覆盖索引: <strong>只访问索引的查询</strong>, 也就是select查询的列和索引一一对应, 对应<code>type</code>是index.</p>
+</blockquote>
+<h4 id="key_len">key_len</h4>
+<p>索引中使用的字节数, 根据<code>key_len</code>计算查询中使用的索引的长度. 不损失精确度的情况下越短越好. 是索引字段最大可能的长度, 不是实际长度, 通过计算得到而不是表内搜出来的. 比如<code>where id = 1</code>和<code>where id = 1 and id = 2</code>搜出来的是一样的数据, 那么前者更好.</p>
+<h4 id="ref">ref</h4>
+<p>这个是表头, 不是type中的ref. 表示索引的哪一列被使用, 比如<code>shared.t2.col1,const</code>, 表示使用了<code>shared</code>库中<code>t2</code>表的<code>col1</code>字段和一个常量.</p>
+<h4 id="rows">rows</h4>
+<p>根据统计信息和索引选用情况, 估计找到所需记录所需要读取的行数. (每张表有多少行被优化器查询)</p>
+<h4 id="extra">Extra</h4>
+<p>其他信息:</p>
+<ul>
+<li>Using filesort: MySQL对数据使用了外部的索引排序, 而不是按表内的索引顺序排序. 所以这个需要被优化. 比如对于复合索引<code>col1_col2_col3</code>, 排序时我们只用了其中一个<code>order by col3</code>.</li>
+<li>Using temporary: 用了临时表保存中间结果. 比如<code>where col1 in ('a','b','c') group by col2</code>, 而索引是<code>idx_col1_col2</code>, 而<code>group by col1, col2</code>就没有此问题.</li>
+<li>Using index: select中使用了<strong>索引覆盖</strong>, 有using where, 那么索引被用来执行索引键值查找. 没有则索引只是用来读取数据, 没有查找动作. 查询的列被索引覆盖, select的的数据列只用从索引中取得, 不用查询数据行</li>
+<li>Using where: 用了where</li>
+<li>Using join buffer: 用了join buffer, 连接缓存</li>
+<li>impossible where: where总是false, 无效</li>
+<li>select tables optimized away: 没有groupby情况下, 基于索引优化min/max操作</li>
+<li>distinct: 优化distinct, 找到第一个匹配的元组后不找了</li>
+</ul>
+<h3 id="避免索引失效">避免索引失效</h3>
+<ol>
+<li>高精度用全值匹配, 避免使用SELECT *, 否则没建索引的colume会导致全表扫描</li>
+<li>最佳左前缀法则, 不要跳过索引中的列, 否则后面也无法用索引. 如果是<code>const</code>的搜索, 跳过中间的列, 就可以看出<code>const</code>并没有和<code>select</code>的列一样多. 这里注意复合索引的每一个元素都作为<code>const</code>查询时, 即使顺序与索引不一致, 也会被优化器优化成一致的. <code>order by</code>实际上也算用到, 不会造成<code>filesort</code>, 但是顺序不能乱</li>
+<li>不在索引列上做操作(函数/计算/自动和手动的类型准换), 否则索引失效变成ALL</li>
+<li>存储引擎不能索引<strong>范围条件</strong>右边的列, 这个时候的<code>type</code>是<code>range</code>, 而不是更好地<code>ref</code></li>
+<li>尽量使用覆盖索引而不是使用<code>select *</code>直接选择硬盘中的数据.</li>
+<li>避免使用不等于<code>!=</code>/<code>&lt;&gt;</code>无法使用索引导致ALL</li>
+<li>避免使用<code>is null</code>/<code>is not null</code>导致ALL</li>
+<li>条件是字符串时, 如果<code>%</code>在<code>like</code>右边, 相当于range类型的检索, 其他会导致索引失效. 如果非要<code>%</code>写在左边, 就只能用覆盖索引解决, 这时候就有<code>using index</code>了, type是<code>index</code>而不是<code>ALL</code>.</li>
+<li>字符串如果没有加单引号会导致索引失效(&lsquo;2000&rsquo;和2000), 因为发生了隐式转换, 虽然查询结果是一样的</li>
+<li>or会导致索引失效</li>
+</ol>
+<blockquote>
+<p><code>group by</code>分组前通常会排序, 那么可能出现<code>Using temporary</code>.</p>
+</blockquote>
+<blockquote>
+<p>为什么索引失效? 为什么最佳左前缀, 因为在b+树中, 如果是联合索引<code>(col1, col2)</code>, 只有在col1下同一个key中, col2的key才有序. 为什么范围不行, 因为范围下的<code>col1</code>互相之间不能保证<code>col2</code>下的key有序. 字符串用<code>like</code>筛选也是一样的, 只有相同前缀字母, 才能保证后面的字母有序.</p>
+</blockquote>
+<h2 id="查询截取分析">查询截取分析</h2>
+<h3 id="inexists">in/exists</h3>
+<p>通常用小表驱动大表, 若A&gt;B, 用in. 若A&lt;B, 用exists. 实际上具体问题具体分析.</p>
+<ul>
+<li>exist: <code>select * from A where exists (select 1 from B where B.id=A.id);</code>. 将主查询数据放到子查询做验证, 根据验证结果(TRUE/FALSE)来决定主查询数据结果是否保留.</li>
+<li>in: <code>select * from A where id in (select id from B);</code>.</li>
+</ul>
+<h3 id="order-by">order by</h3>
+<p>和之前讲的一样, MySQL有FileSort(效率低)和Index(效率高)两种排序. 所以最好要按照索引最佳左前缀排序, 而且最好默认升序, 否则依然会FileSort.</p>
+<p>双路排序: 慢, 单路排序: 快. 但是单路排序会用更多空间, 如果<strong>sort_buffer_size</strong>缓冲区满了, 反而会造成更多的i/o. 也可尝试增加<strong>max_length_for_sort_data</strong>.</p>
+<h3 id="group-by">group by</h3>
+<p>先排序后分组, 能用<code>where</code>就不用<code>having</code>. 同样也可<strong>尝试</strong>通过调整上面两个参数优化.</p>
+<h3 id="慢查询日志">慢查询日志</h3>
+<p>默认不开启, 若打开, 可通过<strong>long_query_time</strong>设置慢查询的阈值.</p>
+<ul>
+<li><code>SHOW VARIABLES LIKE '%slow_query_log%'</code>查看是否开启</li>
+<li><code>set global slow_query_log=1</code>开启</li>
+<li><code>SHOW VARIABLES LIKE 'long_query_time%'</code>查看阈值</li>
+<li><code>set global long_query_time=5</code>改变阈值, 再重新开启会话</li>
+</ul>
+<p>通过日志分析工具<strong>mysqldumpslow</strong>可以用来分析慢查询日志. 命令是<code>mysqldumpslow 日志名</code></p>
+<h2 id="锁机制">锁机制</h2>
+<p>用<code>show open tables;</code>查看锁.</p>
+<h3 id="表锁">表锁</h3>
+<p>偏向<strong>MyISAM</strong>存储引擎, 开销小, 加锁快. <strong>MyISAM</strong>读写锁调度是<strong>写优先</strong>, 不适合做主表引擎. 否则大量更新然查询很难得到锁, 一直被阻塞. 输入<code>show status like 'table%';</code>, 可以看到<code>Table_locks_waited</code>表示等待表锁的次数, 每次等待就自加1. <strong>读锁</strong>阻塞写不阻塞读, <strong>写锁</strong>阻塞读写. <code>select</code>前, MyISAM会自动加读锁, <code>update/delete/insert</code>前, 会自定加表锁. 一般不需要显示地用<code>lock table</code>命令.</p>
+<p>默认情况下, 写锁比读锁具有更高的优先级. 当一个锁释放时, 这个锁会优先给写锁队列中等候的获取锁请求, 然后再给读锁队列中等候的获取锁请求. 所以MyISAM不适合有大量更新操作和查询操作的应用, 因为查询操作很难获得读锁, 一直阻塞.</p>
+<ul>
+<li>读锁(共享锁): <code>lock table 表名 read;</code>, 对同一份数据, 多个读操作可以同时进行而不会互相影响. 上锁之后不能读其他没锁的表, 也不能修改自己. 其他session则可以查询上了锁的表, 但是修改会被阻塞.</li>
+<li>写锁(排他锁): <code>lock table 表名 write;</code>, 当前操作没有完成前, 会阻断其他写锁和读锁. 其他session的读写都会被阻塞.</li>
+<li><code>unlock tables</code>解锁.</li>
+</ul>
+<h3 id="行锁">行锁</h3>
+<p>偏向<strong>InnoDB</strong>, <strong>InnoDB</strong>实现了行级锁定. 对一行的更新会有锁, 导致阻塞, 直到一个session <code>commit</code>, 但是更新不同行并不影响. 读的时候, 只要某个事务没提交, 读的就是修改之前的数据. 用<code>show status like 'innodb_row_lock%';</code>, 查询行锁状态.</p>
+<ul>
+<li>Innodb_row_lock_time_avg: 等待平均时长</li>
+<li>Innodb_row_lock_waits: 等待总次数</li>
+<li>Innodb_row_lock_time: 等待总时长</li>
+</ul>
+<h4 id="行锁变表锁">行锁变表锁</h4>
+<p>当没有索引的时候, 只能全表扫描, 那么一直是表锁. 还有一种情况, 即使有索引, 但是搜索的时候把varchar的单引号漏掉了, 更新记录后导致索引失效, 行锁升级为表锁, 就算修改不同的行, 也会阻塞.</p>
+<h4 id="间隙锁危害">间隙锁危害</h4>
+<p>用范围条件检索数据, InnoDB会给范围内的数据全部加锁, 所以就算一个数据不存在, 其他session <code>insert</code>的数据在这个范围内, 也会被阻塞.</p>
+<h4 id="如何锁定一行">如何锁定一行</h4>
+<p><code>begin;</code>, <code>select * from table where a=8 for update;</code>. 其他session不能操作本行, 直到锁定的行<code>commit</code>.</p>
+<h2 id="主从复制">主从复制</h2>
+<p><strong>todo, after learning redis</strong></p>
+<h2 id="参考">参考</h2>
+<ol>
+<li><a href="https://www.bilibili.com/video/BV12b411K7Zu?p=12">尚硅谷MySQL</a></li>
+<li>MySQL必知必会</li>
+<li>高性能MySQL(第三版)</li>
+<li><a href="https://zhuanlan.zhihu.com/p/130482609">面试官问你B树和B+树, 就把这篇文章丢给他</a></li>
+<li><a href="https://draveness.me/whys-the-design-mysql-b-plus-tree/">为什么MySQL使用B+树</a></li>
+</ol>
+
+        </div>
+
+        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://huanruiz.github.io">拳头</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/">https://huanruiz.github.io/post/notes/22_MySQL-%E9%AB%98%E7%BA%A7/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/notes/21_MySQL-%E5%9F%BA%E7%A1%80/">MySQL-基础</a></li>
+        
+        <li><a href="/post/notes/9_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E9%93%BE%E8%B7%AF%E5%B1%82/">计算机网络-链路层</a></li>
+        
+        <li><a href="/post/notes/8_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%B1%82/">计算机网络-网络层</a></li>
+        
+        <li><a href="/post/notes/7_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E8%BF%90%E8%BE%93%E5%B1%82/">计算机网络-运输层</a></li>
+        
+        <li><a href="/post/notes/6_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E5%BA%94%E7%94%A8%E5%B1%82/">计算机网络-应用层</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/MySQL'>MySQL</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "huanruiz/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2021 <a href="https://huanruiz.github.io">PunchCode By 拳头</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+    <script src='/js/douban.js'></script>
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://huanruiz.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://huanruiz.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/36_Mybatis%E5%85%A5%E9%97%A8/" title="Mybatis入门">Mybatis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/35_Vue%E7%BB%A7%E7%BB%AD%E5%85%A5%E9%97%A8/" title="Vue继续入门">Vue继续入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/34_Vue%E5%85%A5%E9%97%A8/" title="Vue入门">Vue入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/33_Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/other/2_%E4%B8%80%E4%B8%AA%E6%99%AE%E9%80%9A%E4%BB%8E%E9%AB%98%E6%A0%A1%E5%88%B0%E8%81%8C%E5%9C%BA_%E4%B8%8A/" title="从高校到职场-上">从高校到职场-上</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/32_CSS-tutorial/" title="CSS tutorial">CSS tutorial</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/31_HTML%E5%85%A5%E9%97%A8/" title="HTML入门">HTML入门</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/30_JavaWeb-MVC-%E8%BF%87%E6%BB%A4%E5%99%A8-%E7%9B%91%E5%90%AC%E5%99%A8/" title="JavaWeb-MVC/过滤器/监听器">JavaWeb-MVC/过滤器/监听器</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/29_JavaWeb-Cookie_Session/" title="JavaWeb-Cookie/Session">JavaWeb-Cookie/Session</a>
+    </li>
+    
+    <li>
+        <a href="https://huanruiz.github.io/post/notes/28_JavaWeb-Servlet/" title="JavaWeb-Servlet">JavaWeb-Servlet</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://huanruiz.github.io/categories/Java/">Java (3)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记 (36)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E6%96%87/">技术小文 (2)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法 (16)</a></li>
+    
+    <li><a href="https://huanruiz.github.io/categories/%E6%9D%82%E8%B0%88/">杂谈 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://huanruiz.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://huanruiz.github.io/tags/JVM/">JVM</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java/">Java</a>
+    
+    <a href="https://huanruiz.github.io/tags/JavaWeb/">JavaWeb</a>
+    
+    <a href="https://huanruiz.github.io/tags/Java%E5%AD%97%E7%AC%A6%E4%B8%B2/">Java字符串</a>
+    
+    <a href="https://huanruiz.github.io/tags/MySQL/">MySQL</a>
+    
+    <a href="https://huanruiz.github.io/tags/Redis/">Redis</a>
+    
+    <a href="https://huanruiz.github.io/tags/Spring/">Spring</a>
+    
+    <a href="https://huanruiz.github.io/tags/Vue/">Vue</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%89%91%E6%8C%87offer/">剑指offer</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E6%A0%91/">树</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://huanruiz.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://huanruiz.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
